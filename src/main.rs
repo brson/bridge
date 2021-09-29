@@ -84,7 +84,7 @@ pub fn check_bid(state: BidState, bid: Bid) -> BidEvaluationResult {
     }
 }
 
-pub fn evaluate_bid(state: &BidState, bid: &Bid) -> Result<(BidState, BidEvaluation), BidError> {
+fn evaluate_bid(state: &BidState, bid: &Bid) -> Result<(BidState, BidEvaluation), BidError> {
     check_bidding_still_open(state)?;
     check_correct_player(state, bid)?;
 
