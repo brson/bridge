@@ -60,6 +60,8 @@ pub enum BidEvaluation {
     Unknown
 }
 
+pub struct SimulatedBids {
+}
 
 pub fn check_bid(state: BidState, bid: Bid) -> BidEvaluationResult {
     let result = evaluate_bid(&state, &bid);
@@ -90,6 +92,10 @@ fn evaluate_bid(state: &BidState, bid: &Bid) -> Result<(BidState, BidEvaluation)
 
     todo!();
 
+    let simulated = simulate_bid(state);
+
+    todo!();
+
     let mut state = state.clone();
     state.bids.push(*bid);
 
@@ -115,6 +121,10 @@ fn check_correct_player(state: &BidState, bid: &Bid) -> Result<(), BidError> {
     } else {
         Ok(())
     }
+}
+
+fn simulate_bid(state: &BidState) -> SimulatedBids {
+    todo!()
 }
 
 impl BidState {
