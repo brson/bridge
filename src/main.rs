@@ -19,6 +19,7 @@ pub struct Hand {
     cards: [Card; 13],
 }
 
+#[derive(Clone)]
 pub struct BidState {
     dealer: Seat,
     bids: Vec<Bid>
@@ -48,16 +49,53 @@ pub enum BidError {
     IncorrectPlayer { expected: Seat, actual: Seat },
 }
 
-pub fn check_bid(state: BidState, bid: Bid) -> Result<BidState, BidError> {
-    check_bidding_still_open(&state)?;
-    check_correct_player(&state, &bid)?;
+pub struct BidEvaluationResult {
+    state: BidState,
+    bid: Bid,
+    next_state: BidState,
+    evaluation: Result<BidEvaluation, BidError>,
+}
+
+pub enum BidEvaluation {
+    Unknown
+}
+
+
+pub fn check_bid(state: BidState, bid: Bid) -> BidEvaluationResult {
+    let result = evaluate_bid(&state, &bid);
+    match result {
+        Ok((next_state, evaluation)) => {
+            BidEvaluationResult {
+                state,
+                bid,
+                next_state,
+                evaluation: Ok(evaluation)
+            }
+        }
+        Err(e) => {
+            let next_state = state.clone();
+            BidEvaluationResult {
+                state,
+                bid,
+                next_state,
+                evaluation: Err(e)
+            }
+        }
+    }
+}
+
+pub fn evaluate_bid(state: &BidState, bid: &Bid) -> Result<(BidState, BidEvaluation), BidError> {
+    check_bidding_still_open(state)?;
+    check_correct_player(state, bid)?;
 
     todo!();
 
-    let mut state = state;
-    state.bids.push(bid);
+    let mut state = state.clone();
+    state.bids.push(*bid);
 
-    Ok(state)
+    let evaluation = BidEvaluation::Unknown;
+
+    Ok((state, evaluation))
 }
 
 fn check_bidding_still_open(state: &BidState) -> Result<(), BidError> {
