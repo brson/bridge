@@ -6,23 +6,33 @@ fn main() {
 
 
 
+#[derive(Copy, Clone)]
 pub struct Card(u8);
 
-pub struct Hands {
+#[derive(Copy, Clone)]
+pub struct Deck {
     north: Hand,
-    south: Hand,
     east: Hand,
-    weest: Hand,
+    south: Hand,
+    west: Hand,
 }
 
+#[derive(Copy, Clone)]
 pub struct Hand {
     cards: [Card; 13],
 }
 
 #[derive(Clone)]
 pub struct BidState {
+    deck: Deck,
     dealer: Seat,
     bids: Vec<Bid>
+}
+
+pub struct BidderView {
+    hand: Hand,
+    dealer: Seat,
+    bids: Vec<Bid>,
 }
 
 #[derive(Copy, Clone)]
@@ -63,6 +73,10 @@ pub enum BidEvaluation {
 pub struct SimulatedBids {
 }
 
+fn simulate_bid(state: &BidderView) -> SimulatedBids {
+    todo!()
+}
+
 pub fn check_bid(state: BidState, bid: Bid) -> BidEvaluationResult {
     let result = evaluate_bid(&state, &bid);
     match result {
@@ -92,7 +106,8 @@ fn evaluate_bid(state: &BidState, bid: &Bid) -> Result<(BidState, BidEvaluation)
 
     todo!();
 
-    let simulated = simulate_bid(state);
+    let bidder_view = state.bidder_view();
+    let simulated = simulate_bid(&bidder_view);
 
     todo!();
 
@@ -123,11 +138,24 @@ fn check_correct_player(state: &BidState, bid: &Bid) -> Result<(), BidError> {
     }
 }
 
-fn simulate_bid(state: &BidState) -> SimulatedBids {
-    todo!()
-}
-
 impl BidState {
+    fn bidder_view(&self) -> BidderView {
+        BidderView {
+            hand: self.bidder_hand(),
+            dealer: self.dealer,
+            bids: self.bids.clone()
+        }
+    }
+
+    fn bidder_hand(&self) -> Hand {
+        match self.next_player() {
+            Seat::North => self.deck.north,
+            Seat::East => self.deck.east,
+            Seat::South => self.deck.south,
+            Seat::West => self.deck.west
+        }
+    }
+
     fn finished(&self) -> bool {
         self.maybe_next_player().is_some()
     }
