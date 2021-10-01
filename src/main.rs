@@ -135,7 +135,15 @@ fn check_correct_player(state: &BidState, bid: &Bid) -> Result<(), BidError> {
 }
 
 fn simulate_bid(view: &BidderView) -> SimulatedBids {
-    todo!()
+    let player = view.next_player();
+
+    let opening = view.opening();
+
+    if opening {
+        todo!()
+    } else {
+        todo!()
+    }
 }
 
 impl BidState {
@@ -172,6 +180,10 @@ impl BidState {
 impl BidderView {
     fn next_player(&self) -> Seat {
         maybe_next_player(&self.bids, self.dealer).expect("bidding not open")
+    }
+
+    fn opening(&self) -> bool {
+        self.bids.iter().all(|bid| bid.trump == TrumpBid::Pass)
     }
 }
 
