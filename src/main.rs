@@ -73,10 +73,6 @@ pub enum BidEvaluation {
 pub struct SimulatedBids {
 }
 
-fn simulate_bid(state: &BidderView) -> SimulatedBids {
-    todo!()
-}
-
 pub fn check_bid(state: BidState, bid: Bid) -> BidEvaluationResult {
     let result = evaluate_bid(&state, &bid);
     match result {
@@ -138,6 +134,10 @@ fn check_correct_player(state: &BidState, bid: &Bid) -> Result<(), BidError> {
     }
 }
 
+fn simulate_bid(state: &BidderView) -> SimulatedBids {
+    todo!()
+}
+
 impl BidState {
     fn bidder_view(&self) -> BidderView {
         BidderView {
@@ -165,26 +165,52 @@ impl BidState {
     }
 
     fn maybe_next_player(&self) -> Option<Seat> {
-        if self.have_three_passes() {
-            return None;
-        }
-
-        if let Some(last) = self.bids.last().cloned() {
-            Some(last.player.next())
-        } else {
-            Some(self.dealer)
-        }
+        maybe_next_player(&self.bids, self.dealer)
     }
 
     fn have_three_passes(&self) -> bool {
-        let bidcount = self.bids.len();
-        if bidcount < 3 {
-            return false;
-        }
-        let dropbids = bidcount - 3;
-        self.bids.iter().take(dropbids)
-            .all(|bid| bid.trump == TrumpBid::Pass)
+        have_three_passes(&self.bids)
     }
+}
+
+impl BidderView {
+    fn finished(&self) -> bool {
+        self.maybe_next_player().is_some()
+    }
+
+    fn next_player(&self) -> Seat {
+        self.maybe_next_player().expect("bidding not open")
+    }
+
+    fn maybe_next_player(&self) -> Option<Seat> {
+        maybe_next_player(&self.bids, self.dealer)
+    }
+
+    fn have_three_passes(&self) -> bool {
+        have_three_passes(&self.bids)
+    }
+}
+
+fn maybe_next_player(bids: &[Bid], dealer: Seat) -> Option<Seat> {
+    if have_three_passes(bids) {
+        return None;
+    }
+
+    if let Some(last) = bids.last().cloned() {
+        Some(last.player.next())
+    } else {
+        Some(dealer)
+    }
+}
+
+fn have_three_passes(bids: &[Bid]) -> bool {
+    let bidcount = bids.len();
+    if bidcount < 3 {
+        return false;
+    }
+    let dropbids = bidcount - 3;
+    bids.iter().take(dropbids)
+        .all(|bid| bid.trump == TrumpBid::Pass)
 }
 
 impl Seat {
