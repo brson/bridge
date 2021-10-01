@@ -134,7 +134,7 @@ fn check_correct_player(state: &BidState, bid: &Bid) -> Result<(), BidError> {
     }
 }
 
-fn simulate_bid(state: &BidderView) -> SimulatedBids {
+fn simulate_bid(view: &BidderView) -> SimulatedBids {
     todo!()
 }
 
@@ -167,27 +167,11 @@ impl BidState {
     fn maybe_next_player(&self) -> Option<Seat> {
         maybe_next_player(&self.bids, self.dealer)
     }
-
-    fn have_three_passes(&self) -> bool {
-        have_three_passes(&self.bids)
-    }
 }
 
 impl BidderView {
-    fn finished(&self) -> bool {
-        self.maybe_next_player().is_some()
-    }
-
     fn next_player(&self) -> Seat {
-        self.maybe_next_player().expect("bidding not open")
-    }
-
-    fn maybe_next_player(&self) -> Option<Seat> {
-        maybe_next_player(&self.bids, self.dealer)
-    }
-
-    fn have_three_passes(&self) -> bool {
-        have_three_passes(&self.bids)
+        maybe_next_player(&self.bids, self.dealer).expect("bidding not open")
     }
 }
 
