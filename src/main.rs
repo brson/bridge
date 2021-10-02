@@ -1,58 +1,15 @@
+// http://www.kwbridge.com/basics.htm
+
 #![allow(unused)]
+
+pub mod defs;
+
+use defs::*;
 
 fn main() {
     println!("Hello, world!");
 }
 
-
-
-#[derive(Copy, Clone)]
-pub struct Card(u8);
-
-#[derive(Copy, Clone)]
-pub struct Deck {
-    north: Hand,
-    east: Hand,
-    south: Hand,
-    west: Hand,
-}
-
-#[derive(Copy, Clone)]
-pub struct Hand {
-    cards: [Card; 13],
-}
-
-#[derive(Clone)]
-pub struct BidState {
-    deck: Deck,
-    dealer: Seat,
-    bids: Vec<Bid>
-}
-
-pub struct BidderView {
-    hand: Hand,
-    dealer: Seat,
-    bids: Vec<Bid>,
-}
-
-#[derive(Copy, Clone)]
-pub struct Bid {
-    player: Seat,
-    trump: TrumpBid
-}
-
-#[derive(Eq, PartialEq, Copy, Clone)]
-pub enum TrumpBid {
-    NoTrump(Wins), Major(Wins), Minor(Wins), Pass
-}
-
-#[derive(Eq, PartialEq, Copy, Clone)]
-pub struct Wins(u8);
-
-#[derive(Eq, PartialEq, Copy, Clone)]
-pub enum Seat {
-    North, South, East, West
-}
 
 pub enum BidError {
     BiddingClosed,
@@ -72,6 +29,7 @@ pub enum BidEvaluation {
 
 pub struct SimulatedBids {
 }
+
 
 pub fn check_bid(state: BidState, bid: Bid) -> BidEvaluationResult {
     let result = evaluate_bid(&state, &bid);
@@ -147,104 +105,3 @@ fn simulate_bid(view: &BidderView) -> SimulatedBids {
     }
 }
 
-impl BidState {
-    fn bidder_view(&self) -> BidderView {
-        BidderView {
-            hand: self.bidder_hand(),
-            dealer: self.dealer,
-            bids: self.bids.clone()
-        }
-    }
-
-    fn bidder_hand(&self) -> Hand {
-        match self.next_player() {
-            Seat::North => self.deck.north,
-            Seat::East => self.deck.east,
-            Seat::South => self.deck.south,
-            Seat::West => self.deck.west
-        }
-    }
-
-    fn finished(&self) -> bool {
-        self.maybe_next_player().is_some()
-    }
-
-    fn next_player(&self) -> Seat {
-        self.maybe_next_player().expect("bidding not open")
-    }
-
-    fn maybe_next_player(&self) -> Option<Seat> {
-        maybe_next_player(&self.bids, self.dealer)
-    }
-}
-
-impl BidderView {
-    fn next_player(&self) -> Seat {
-        maybe_next_player(&self.bids, self.dealer).expect("bidding not open")
-    }
-
-    fn opening(&self) -> bool {
-        self.bids.iter().all(|bid| bid.trump == TrumpBid::Pass)
-    }
-
-    fn hcps(&self) -> u8 {
-        self.hand.cards.iter().map(Card::points).sum()
-    }
-}
-
-fn maybe_next_player(bids: &[Bid], dealer: Seat) -> Option<Seat> {
-    if have_three_passes(bids) {
-        return None;
-    }
-
-    if let Some(last) = bids.last().cloned() {
-        Some(last.player.next())
-    } else {
-        Some(dealer)
-    }
-}
-
-fn have_three_passes(bids: &[Bid]) -> bool {
-    let bidcount = bids.len();
-    if bidcount < 3 {
-        return false;
-    }
-    let dropbids = bidcount - 3;
-    bids.iter().take(dropbids)
-        .all(|bid| bid.trump == TrumpBid::Pass)
-}
-
-impl Seat {
-    fn next(&self) -> Seat {
-        match self {
-            Seat::North => Seat::East,
-            Seat::East => Seat::South,
-            Seat::South => Seat::West,
-            Seat::West => Seat::North,
-        }
-    }
-}
-
-const ACE_IDX: u8 = 14;
-const KING_IDX: u8 = 13;
-const QUEEN_IDX: u8 = 12;
-const JACK_IDX: u8 = 11;
-
-const ACE_POINTS: u8 = 4;
-const KING_POINTS: u8 = 3;
-const QUEEN_POINTS: u8 = 2;
-const JACK_POINTS: u8 = 1;
-
-impl Card {
-    fn points(&self) -> u8 {
-        assert!(self.0 <= ACE_IDX);
-        assert!(self.0 >= 2);
-        match self.0 {
-            ACE_IDX => ACE_POINTS,
-            KING_IDX => KING_POINTS,
-            QUEEN_IDX => QUEEN_POINTS,
-            JACK_IDX => JACK_POINTS,
-            _ => 0,
-        }
-    }
-}
