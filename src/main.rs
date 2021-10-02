@@ -188,7 +188,7 @@ impl BidderView {
     }
 
     fn hcp(&self) -> u8 {
-        todo!()
+        self.hand.cards.iter().map(Card::points).sum()
     }
 }
 
