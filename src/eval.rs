@@ -47,7 +47,7 @@ fn evaluate_call(state: &AuctionState, call: &PlayerCall) -> Result<(AuctionStat
     todo!();
 
     let bidder_view = state.bidder_view();
-    let simulated = sim::simulate_bid(&bidder_view);
+    let simulated = sim::simulate_call(&bidder_view);
 
     todo!();
 

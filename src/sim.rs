@@ -1,9 +1,9 @@
-use crate::defs::BidderView;
+use crate::defs::AuctionPlayerView;
 
-pub struct SimulatedBids {
+pub struct SimulatedCalls {
 }
 
-pub fn simulate_bid(view: &BidderView) -> SimulatedBids {
+pub fn simulate_call(view: &AuctionPlayerView) -> SimulatedCalls {
     let player = view.next_player();
 
     let opening = view.opening();

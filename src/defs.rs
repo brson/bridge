@@ -23,7 +23,7 @@ pub struct AuctionState {
     pub calls: Vec<PlayerCall>
 }
 
-pub struct BidderView {
+pub struct AuctionPlayerView {
     pub hand: Hand,
     pub dealer: Seat,
     pub calls: Vec<PlayerCall>,
@@ -61,8 +61,8 @@ pub enum Seat {
 }
 
 impl AuctionState {
-    pub fn bidder_view(&self) -> BidderView {
-        BidderView {
+    pub fn bidder_view(&self) -> AuctionPlayerView {
+        AuctionPlayerView {
             hand: self.bidder_hand(),
             dealer: self.dealer,
             calls: self.calls.clone()
@@ -91,7 +91,7 @@ impl AuctionState {
     }
 }
 
-impl BidderView {
+impl AuctionPlayerView {
     pub fn next_player(&self) -> Seat {
         maybe_next_player(&self.calls, self.dealer).expect("bidding not open")
     }
