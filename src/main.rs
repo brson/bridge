@@ -3,6 +3,7 @@
 #![allow(unused)]
 
 pub mod defs;
+pub mod sim;
 
 use defs::*;
 
@@ -26,10 +27,6 @@ pub struct BidEvaluationResult {
 pub enum BidEvaluation {
     Unknown
 }
-
-pub struct SimulatedBids {
-}
-
 
 pub fn check_bid(state: BidState, bid: Bid) -> BidEvaluationResult {
     let result = evaluate_bid(&state, &bid);
@@ -61,7 +58,7 @@ fn evaluate_bid(state: &BidState, bid: &Bid) -> Result<(BidState, BidEvaluation)
     todo!();
 
     let bidder_view = state.bidder_view();
-    let simulated = simulate_bid(&bidder_view);
+    let simulated = sim::simulate_bid(&bidder_view);
 
     todo!();
 
@@ -91,17 +88,3 @@ fn check_correct_player(state: &BidState, bid: &Bid) -> Result<(), BidError> {
         Ok(())
     }
 }
-
-fn simulate_bid(view: &BidderView) -> SimulatedBids {
-    let player = view.next_player();
-
-    let opening = view.opening();
-
-    if opening {
-        let have_12plus_hcps = view.hcps() >= 12;
-        todo!()
-    } else {
-        todo!()
-    }
-}
-
