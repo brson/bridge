@@ -1,27 +1,27 @@
 use crate::defs::*;
 use crate::sim;
 
-pub enum BidError {
+pub enum CallError {
     BiddingClosed,
     IncorrectPlayer { expected: Seat, actual: Seat },
 }
 
-pub struct BidEvaluationResult {
+pub struct CallEvaluationResult {
     pub state: AuctionState,
     pub call: PlayerCall,
     pub next_state: AuctionState,
-    pub evaluation: Result<BidEvaluation, BidError>,
+    pub evaluation: Result<CallEvaluation, CallError>,
 }
 
-pub enum BidEvaluation {
+pub enum CallEvaluation {
     Unknown
 }
 
-pub fn check_call(state: AuctionState, call: PlayerCall) -> BidEvaluationResult {
+pub fn check_call(state: AuctionState, call: PlayerCall) -> CallEvaluationResult {
     let result = evaluate_call(&state, &call);
     match result {
         Ok((next_state, evaluation)) => {
-            BidEvaluationResult {
+            CallEvaluationResult {
                 state,
                 call,
                 next_state,
@@ -30,7 +30,7 @@ pub fn check_call(state: AuctionState, call: PlayerCall) -> BidEvaluationResult 
         }
         Err(e) => {
             let next_state = state.clone();
-            BidEvaluationResult {
+            CallEvaluationResult {
                 state,
                 call,
                 next_state,
@@ -40,7 +40,7 @@ pub fn check_call(state: AuctionState, call: PlayerCall) -> BidEvaluationResult 
     }
 }
 
-fn evaluate_call(state: &AuctionState, call: &PlayerCall) -> Result<(AuctionState, BidEvaluation), BidError> {
+fn evaluate_call(state: &AuctionState, call: &PlayerCall) -> Result<(AuctionState, CallEvaluation), CallError> {
     check_bidding_still_open(state)?;
     check_correct_player(state, call)?;
 
@@ -54,22 +54,22 @@ fn evaluate_call(state: &AuctionState, call: &PlayerCall) -> Result<(AuctionStat
     let mut state = state.clone();
     state.calls.push(*call);
 
-    let evaluation = BidEvaluation::Unknown;
+    let evaluation = CallEvaluation::Unknown;
 
     Ok((state, evaluation))
 }
 
-fn check_bidding_still_open(state: &AuctionState) -> Result<(), BidError> {
+fn check_bidding_still_open(state: &AuctionState) -> Result<(), CallError> {
     if state.finished() {
-        Err(BidError::BiddingClosed)
+        Err(CallError::BiddingClosed)
     } else {
         Ok(())
     }
 }
 
-fn check_correct_player(state: &AuctionState, call: &PlayerCall) -> Result<(), BidError> {
+fn check_correct_player(state: &AuctionState, call: &PlayerCall) -> Result<(), CallError> {
     if state.next_player() != call.player {
-        Err(BidError::IncorrectPlayer {
+        Err(CallError::IncorrectPlayer {
             expected: state.next_player(),
             actual: call.player
         })
