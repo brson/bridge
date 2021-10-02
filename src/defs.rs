@@ -45,15 +45,15 @@ pub enum Call {
 
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub enum Bid {
-    NoTrump(Wins),
-    Spades(Wins),
-    Hearts(Wins),
-    Diamonds(Wins),
-    Clubs(Wins),
+    NoTrump(Level),
+    Spades(Level),
+    Hearts(Level),
+    Diamonds(Level),
+    Clubs(Level),
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
-pub struct Wins(u8);
+pub struct Level(u8);
 
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub enum Seat {
