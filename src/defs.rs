@@ -17,7 +17,7 @@ pub struct Hand {
 }
 
 #[derive(Clone)]
-pub struct BidState {
+pub struct AuctionState {
     pub deck: Deck,
     pub dealer: Seat,
     pub calls: Vec<PlayerCall>
@@ -60,7 +60,7 @@ pub enum Seat {
     North, South, East, West
 }
 
-impl BidState {
+impl AuctionState {
     pub fn bidder_view(&self) -> BidderView {
         BidderView {
             hand: self.bidder_hand(),

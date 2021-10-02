@@ -7,9 +7,9 @@ pub enum BidError {
 }
 
 pub struct BidEvaluationResult {
-    pub state: BidState,
+    pub state: AuctionState,
     pub call: PlayerCall,
-    pub next_state: BidState,
+    pub next_state: AuctionState,
     pub evaluation: Result<BidEvaluation, BidError>,
 }
 
@@ -17,7 +17,7 @@ pub enum BidEvaluation {
     Unknown
 }
 
-pub fn check_call(state: BidState, call: PlayerCall) -> BidEvaluationResult {
+pub fn check_call(state: AuctionState, call: PlayerCall) -> BidEvaluationResult {
     let result = evaluate_call(&state, &call);
     match result {
         Ok((next_state, evaluation)) => {
@@ -40,7 +40,7 @@ pub fn check_call(state: BidState, call: PlayerCall) -> BidEvaluationResult {
     }
 }
 
-fn evaluate_call(state: &BidState, call: &PlayerCall) -> Result<(BidState, BidEvaluation), BidError> {
+fn evaluate_call(state: &AuctionState, call: &PlayerCall) -> Result<(AuctionState, BidEvaluation), BidError> {
     check_bidding_still_open(state)?;
     check_correct_player(state, call)?;
 
@@ -59,7 +59,7 @@ fn evaluate_call(state: &BidState, call: &PlayerCall) -> Result<(BidState, BidEv
     Ok((state, evaluation))
 }
 
-fn check_bidding_still_open(state: &BidState) -> Result<(), BidError> {
+fn check_bidding_still_open(state: &AuctionState) -> Result<(), BidError> {
     if state.finished() {
         Err(BidError::BiddingClosed)
     } else {
@@ -67,7 +67,7 @@ fn check_bidding_still_open(state: &BidState) -> Result<(), BidError> {
     }
 }
 
-fn check_correct_player(state: &BidState, call: &PlayerCall) -> Result<(), BidError> {
+fn check_correct_player(state: &AuctionState, call: &PlayerCall) -> Result<(), BidError> {
     if state.next_player() != call.player {
         Err(BidError::IncorrectPlayer {
             expected: state.next_player(),
