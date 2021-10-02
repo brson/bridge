@@ -140,6 +140,7 @@ fn simulate_bid(view: &BidderView) -> SimulatedBids {
     let opening = view.opening();
 
     if opening {
+        let have_12plus_hcp = view.hcp() >= 12;
         todo!()
     } else {
         todo!()
@@ -185,6 +186,10 @@ impl BidderView {
     fn opening(&self) -> bool {
         self.bids.iter().all(|bid| bid.trump == TrumpBid::Pass)
     }
+
+    fn hcp(&self) -> u8 {
+        todo!()
+    }
 }
 
 fn maybe_next_player(bids: &[Bid], dealer: Seat) -> Option<Seat> {
@@ -216,6 +221,30 @@ impl Seat {
             Seat::East => Seat::South,
             Seat::South => Seat::West,
             Seat::West => Seat::North,
+        }
+    }
+}
+
+const ACE_IDX: u8 = 14;
+const KING_IDX: u8 = 13;
+const QUEEN_IDX: u8 = 12;
+const JACK_IDX: u8 = 11;
+
+const ACE_POINTS: u8 = 4;
+const KING_POINTS: u8 = 3;
+const QUEEN_POINTS: u8 = 2;
+const JACK_POINTS: u8 = 1;
+
+impl Card {
+    fn points(&self) -> u8 {
+        assert!(self.0 <= ACE_IDX);
+        assert!(self.0 >= 2);
+        match self.0 {
+            ACE_IDX => ACE_POINTS,
+            KING_IDX => KING_POINTS,
+            QUEEN_IDX => QUEEN_POINTS,
+            JACK_IDX => JACK_POINTS,
+            _ => 0,
         }
     }
 }
