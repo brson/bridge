@@ -100,7 +100,7 @@ impl AuctionPlayerView {
         self.calls.iter().all(|call| call.call == Call::Pass)
     }
 
-    pub fn hcps(&self) -> u8 {
+    pub fn high_card_points(&self) -> u8 {
         self.hand.cards.iter().map(Card::points).sum()
     }
 }

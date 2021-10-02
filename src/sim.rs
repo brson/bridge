@@ -9,7 +9,7 @@ pub fn simulate_call(view: &AuctionPlayerView) -> SimulatedCalls {
     let opening = view.opening();
 
     if opening {
-        let have_12plus_hcps = view.hcps() >= 12;
+        let have_12plus_hcps = view.high_card_points() >= 12;
         todo!()
     } else {
         todo!()
