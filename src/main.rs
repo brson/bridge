@@ -140,7 +140,7 @@ fn simulate_bid(view: &BidderView) -> SimulatedBids {
     let opening = view.opening();
 
     if opening {
-        let have_12plus_hcp = view.hcp() >= 12;
+        let have_12plus_hcps = view.hcps() >= 12;
         todo!()
     } else {
         todo!()
@@ -187,7 +187,7 @@ impl BidderView {
         self.bids.iter().all(|bid| bid.trump == TrumpBid::Pass)
     }
 
-    fn hcp(&self) -> u8 {
+    fn hcps(&self) -> u8 {
         self.hand.cards.iter().map(Card::points).sum()
     }
 }
