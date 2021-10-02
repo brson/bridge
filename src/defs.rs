@@ -18,23 +18,23 @@ pub struct Hand {
 pub struct BidState {
     pub deck: Deck,
     pub dealer: Seat,
-    pub bids: Vec<Bid>
+    pub bids: Vec<PlayerBid>
 }
 
 pub struct BidderView {
     pub hand: Hand,
     pub dealer: Seat,
-    pub bids: Vec<Bid>,
+    pub bids: Vec<PlayerBid>,
 }
 
 #[derive(Copy, Clone)]
-pub struct Bid {
+pub struct PlayerBid {
     pub player: Seat,
-    pub trump: TrumpBid
+    pub bid: Bid
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
-pub enum TrumpBid {
+pub enum Bid {
     NoTrump(Wins), Major(Wins), Minor(Wins), Pass
 }
 
@@ -83,7 +83,7 @@ impl BidderView {
     }
 
     pub fn opening(&self) -> bool {
-        self.bids.iter().all(|bid| bid.trump == TrumpBid::Pass)
+        self.bids.iter().all(|bid| bid.bid == Bid::Pass)
     }
 
     pub fn hcps(&self) -> u8 {
@@ -91,7 +91,7 @@ impl BidderView {
     }
 }
 
-fn maybe_next_player(bids: &[Bid], dealer: Seat) -> Option<Seat> {
+fn maybe_next_player(bids: &[PlayerBid], dealer: Seat) -> Option<Seat> {
     if have_three_passes(bids) {
         return None;
     }
@@ -103,14 +103,14 @@ fn maybe_next_player(bids: &[Bid], dealer: Seat) -> Option<Seat> {
     }
 }
 
-fn have_three_passes(bids: &[Bid]) -> bool {
+fn have_three_passes(bids: &[PlayerBid]) -> bool {
     let bidcount = bids.len();
     if bidcount < 3 {
         return false;
     }
     let dropbids = bidcount - 3;
     bids.iter().take(dropbids)
-        .all(|bid| bid.trump == TrumpBid::Pass)
+        .all(|bid| bid.bid == Bid::Pass)
 }
 
 impl Seat {

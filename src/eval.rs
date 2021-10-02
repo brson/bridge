@@ -8,7 +8,7 @@ pub enum BidError {
 
 pub struct BidEvaluationResult {
     pub state: BidState,
-    pub bid: Bid,
+    pub bid: PlayerBid,
     pub next_state: BidState,
     pub evaluation: Result<BidEvaluation, BidError>,
 }
@@ -17,7 +17,7 @@ pub enum BidEvaluation {
     Unknown
 }
 
-pub fn check_bid(state: BidState, bid: Bid) -> BidEvaluationResult {
+pub fn check_bid(state: BidState, bid: PlayerBid) -> BidEvaluationResult {
     let result = evaluate_bid(&state, &bid);
     match result {
         Ok((next_state, evaluation)) => {
@@ -40,7 +40,7 @@ pub fn check_bid(state: BidState, bid: Bid) -> BidEvaluationResult {
     }
 }
 
-fn evaluate_bid(state: &BidState, bid: &Bid) -> Result<(BidState, BidEvaluation), BidError> {
+fn evaluate_bid(state: &BidState, bid: &PlayerBid) -> Result<(BidState, BidEvaluation), BidError> {
     check_bidding_still_open(state)?;
     check_correct_player(state, bid)?;
 
@@ -67,7 +67,7 @@ fn check_bidding_still_open(state: &BidState) -> Result<(), BidError> {
     }
 }
 
-fn check_correct_player(state: &BidState, bid: &Bid) -> Result<(), BidError> {
+fn check_correct_player(state: &BidState, bid: &PlayerBid) -> Result<(), BidError> {
     if state.next_player() != bid.player {
         Err(BidError::IncorrectPlayer {
             expected: state.next_player(),
