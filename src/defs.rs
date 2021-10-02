@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 #[derive(Copy, Clone)]
 pub struct Card(u8);
 
@@ -145,5 +147,11 @@ impl Card {
             JACK_IDX => JACK_POINTS,
             _ => 0,
         }
+    }
+}
+
+impl PartialOrd for Bid {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        todo!()
     }
 }
