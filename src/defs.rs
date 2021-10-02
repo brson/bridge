@@ -37,7 +37,12 @@ pub struct PlayerBid {
 
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub enum Bid {
-    NoTrump(Wins), Major(Wins), Minor(Wins), Pass
+    NoTrump(Wins),
+    Spades(Wins),
+    Hearts(Wins),
+    Diamonds(Wins),
+    Clubs(Wins),
+    Pass
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
