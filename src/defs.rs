@@ -44,12 +44,18 @@ pub enum Call {
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
-pub enum Bid {
-    NoTrump(Level),
-    Spades(Level),
-    Hearts(Level),
-    Diamonds(Level),
-    Clubs(Level),
+pub struct Bid {
+    pub suit: Suit,
+    pub level: Level,
+}
+
+#[derive(Eq, PartialEq, Copy, Clone)]
+pub enum Suit {
+    NoTrump,
+    Spades,
+    Hearts,
+    Diamods,
+    Clubs,
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
