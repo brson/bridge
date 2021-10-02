@@ -8,7 +8,7 @@ pub enum BidError {
 
 pub struct BidEvaluationResult {
     pub state: BidState,
-    pub bid: PlayerBid,
+    pub call: PlayerCall,
     pub next_state: BidState,
     pub evaluation: Result<BidEvaluation, BidError>,
 }
@@ -17,13 +17,13 @@ pub enum BidEvaluation {
     Unknown
 }
 
-pub fn check_bid(state: BidState, bid: PlayerBid) -> BidEvaluationResult {
-    let result = evaluate_bid(&state, &bid);
+pub fn check_call(state: BidState, call: PlayerCall) -> BidEvaluationResult {
+    let result = evaluate_call(&state, &call);
     match result {
         Ok((next_state, evaluation)) => {
             BidEvaluationResult {
                 state,
-                bid,
+                call,
                 next_state,
                 evaluation: Ok(evaluation)
             }
@@ -32,7 +32,7 @@ pub fn check_bid(state: BidState, bid: PlayerBid) -> BidEvaluationResult {
             let next_state = state.clone();
             BidEvaluationResult {
                 state,
-                bid,
+                call,
                 next_state,
                 evaluation: Err(e)
             }
@@ -40,9 +40,9 @@ pub fn check_bid(state: BidState, bid: PlayerBid) -> BidEvaluationResult {
     }
 }
 
-fn evaluate_bid(state: &BidState, bid: &PlayerBid) -> Result<(BidState, BidEvaluation), BidError> {
+fn evaluate_call(state: &BidState, call: &PlayerCall) -> Result<(BidState, BidEvaluation), BidError> {
     check_bidding_still_open(state)?;
-    check_correct_player(state, bid)?;
+    check_correct_player(state, call)?;
 
     todo!();
 
@@ -52,7 +52,7 @@ fn evaluate_bid(state: &BidState, bid: &PlayerBid) -> Result<(BidState, BidEvalu
     todo!();
 
     let mut state = state.clone();
-    state.bids.push(*bid);
+    state.calls.push(*call);
 
     let evaluation = BidEvaluation::Unknown;
 
@@ -67,11 +67,11 @@ fn check_bidding_still_open(state: &BidState) -> Result<(), BidError> {
     }
 }
 
-fn check_correct_player(state: &BidState, bid: &PlayerBid) -> Result<(), BidError> {
-    if state.next_player() != bid.player {
+fn check_correct_player(state: &BidState, call: &PlayerCall) -> Result<(), BidError> {
+    if state.next_player() != call.player {
         Err(BidError::IncorrectPlayer {
             expected: state.next_player(),
-            actual: bid.player
+            actual: call.player
         })
     } else {
         Ok(())

@@ -20,19 +20,27 @@ pub struct Hand {
 pub struct BidState {
     pub deck: Deck,
     pub dealer: Seat,
-    pub bids: Vec<PlayerBid>
+    pub calls: Vec<PlayerCall>
 }
 
 pub struct BidderView {
     pub hand: Hand,
     pub dealer: Seat,
-    pub bids: Vec<PlayerBid>,
+    pub calls: Vec<PlayerCall>,
 }
 
 #[derive(Copy, Clone)]
-pub struct PlayerBid {
+pub struct PlayerCall {
     pub player: Seat,
-    pub bid: Bid
+    pub call: Call,
+}
+
+#[derive(Eq, PartialEq, Copy, Clone)]
+pub enum Call {
+    Bid(Bid),
+    Pass,
+    Double,
+    Redouble,
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
@@ -42,7 +50,6 @@ pub enum Bid {
     Hearts(Wins),
     Diamonds(Wins),
     Clubs(Wins),
-    Pass
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
@@ -58,7 +65,7 @@ impl BidState {
         BidderView {
             hand: self.bidder_hand(),
             dealer: self.dealer,
-            bids: self.bids.clone()
+            calls: self.calls.clone()
         }
     }
 
@@ -80,17 +87,17 @@ impl BidState {
     }
 
     pub fn maybe_next_player(&self) -> Option<Seat> {
-        maybe_next_player(&self.bids, self.dealer)
+        maybe_next_player(&self.calls, self.dealer)
     }
 }
 
 impl BidderView {
     pub fn next_player(&self) -> Seat {
-        maybe_next_player(&self.bids, self.dealer).expect("bidding not open")
+        maybe_next_player(&self.calls, self.dealer).expect("bidding not open")
     }
 
     pub fn opening(&self) -> bool {
-        self.bids.iter().all(|bid| bid.bid == Bid::Pass)
+        self.calls.iter().all(|call| call.call == Call::Pass)
     }
 
     pub fn hcps(&self) -> u8 {
@@ -98,26 +105,26 @@ impl BidderView {
     }
 }
 
-fn maybe_next_player(bids: &[PlayerBid], dealer: Seat) -> Option<Seat> {
-    if have_three_passes(bids) {
+fn maybe_next_player(calls: &[PlayerCall], dealer: Seat) -> Option<Seat> {
+    if have_three_passes(calls) {
         return None;
     }
 
-    if let Some(last) = bids.last().cloned() {
+    if let Some(last) = calls.last().cloned() {
         Some(last.player.next())
     } else {
         Some(dealer)
     }
 }
 
-fn have_three_passes(bids: &[PlayerBid]) -> bool {
-    let bidcount = bids.len();
-    if bidcount < 3 {
+fn have_three_passes(calls: &[PlayerCall]) -> bool {
+    let callcount = calls.len();
+    if callcount < 3 {
         return false;
     }
-    let dropbids = bidcount - 3;
-    bids.iter().take(dropbids)
-        .all(|bid| bid.bid == Bid::Pass)
+    let dropcalls = callcount - 3;
+    calls.iter().take(dropcalls)
+        .all(|call| call.call == Call::Pass)
 }
 
 impl Seat {
