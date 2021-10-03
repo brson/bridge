@@ -73,10 +73,23 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         hcps(11, 12)
     {
         // marginal cases
-        let long_suit = todo!();
+        let long_suit = {
+            if hearts > 5 && hearts >= spades {
+                Some(BidSuit::Hearts)
+            } else if spades > 5 {
+                Some(BidSuit::Spades)
+            } else {
+                None
+            }
+        };
         let distributional_strength = todo!();
-        let good_quick_tricks = todo!();
-        todo!()
+        let good_quick_tricks = None; // todo
+
+        if let Some(long_suit) = long_suit {
+            bid(1, long_suit, BidReason::Todo)
+        } else {
+            pass()
+        }
     } else if
         hcps(20, 22)
         && balanced
