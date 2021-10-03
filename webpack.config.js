@@ -30,7 +30,8 @@ module.exports = {
 
         new WasmPackPlugin({
             crateDirectory: __dirname,
-            outName: "bridge"
+            outName: "bridge",
+            /*extraArgs: "--target bundler"*/
         }),
     ]
 };

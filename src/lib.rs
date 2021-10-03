@@ -4,5 +4,5 @@ pub mod defs;
 pub mod sim;
 pub mod eval;
 
-#[cfg(target = "wasm32-unknown-unknown")]
+#[cfg(target_family = "wasm")]
 pub mod wasm;

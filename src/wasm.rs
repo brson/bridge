@@ -10,4 +10,6 @@ pub fn set_panic_hook() {
 }
 
 #[wasm_bindgen]
-extern fn alert(s: &str);
+extern {
+    fn alert(s: &str);
+}
