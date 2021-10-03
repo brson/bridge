@@ -231,3 +231,14 @@ impl Hand {
             .try_into().expect("u8")
     }
 }
+
+impl Suit {
+    pub fn to_bid_suit(&self) -> BidSuit {
+        match self {
+            Suit::Clubs => BidSuit::Clubs,
+            Suit::Diamonds => BidSuit::Diamonds,
+            Suit::Hearts => BidSuit::Hearts,
+            Suit::Spades => BidSuit::Spades,
+        }
+    }
+}

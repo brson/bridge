@@ -15,6 +15,7 @@ pub enum BidReason {
     Todo,
     OpeningConvenientMinor,
     OpeningArtificialVeryStrongHand,
+    OpeningWeakTwoBid,
 }
 
 pub fn simulate_call(view: &AuctionPlayerView) -> SimulatedCalls {
@@ -107,8 +108,27 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
     } else if
         hcps(5, 10)
     {
-        // weak hand
-        todo!()
+        // weak hand, try weak 2-bid
+
+        let mut suits = view.suit_distributions();
+        suits.sort_by_key(|(count, _suit)| *count);
+        suits.reverse();
+
+        let long_suit = {
+            // Can't do a weak clubs 2-bid
+            if suits[0].1 != Suit::Clubs {
+                suits[0]
+            } else {
+                suits[1]
+            }
+        };
+
+        if long_suit.0 >= 6 {
+            let suit = long_suit.1.to_bid_suit();
+            bid(2, suit, BidReason::OpeningWeakTwoBid)
+        } else {
+            pass()
+        }
     } else {
         pass()
     }
