@@ -108,7 +108,9 @@ impl AuctionPlayerView {
     }
 
     pub fn high_card_points(&self) -> u8 {
-        self.hand.cards.iter().map(Card::points).sum()
+        let hcps = self.hand.cards.iter().map(Card::points).sum();
+        assert!(hcps <= MAX_HCPS);
+        hcps
     }
 
     pub fn balanced(&self) -> bool {
@@ -176,6 +178,12 @@ const ACE_POINTS: u8 = 4;
 const KING_POINTS: u8 = 3;
 const QUEEN_POINTS: u8 = 2;
 const JACK_POINTS: u8 = 1;
+
+pub const MAX_HCPS: u8 =
+    4 * ACE_POINTS +
+    4 * KING_POINTS +
+    4 * QUEEN_POINTS +
+    1 * JACK_POINTS;
 
 impl Card {
     pub fn points(&self) -> u8 {

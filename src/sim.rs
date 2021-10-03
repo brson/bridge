@@ -3,6 +3,7 @@
 use crate::defs::{
     AuctionPlayerView,
     BidSuit,
+    MAX_HCPS,
     Suit,
 };
 
@@ -11,7 +12,8 @@ pub struct SimulatedCalls {
 
 pub enum BidReason {
     Todo,
-    ConvenientMinor,
+    OpeningConvenientMinor,
+    OpeningArtificialVeryStrongHand,
 }
 
 pub fn simulate_call(view: &AuctionPlayerView) -> SimulatedCalls {
@@ -63,13 +65,17 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
             bid(1, BidSuit::Diamonds, BidReason::Todo)
         } else {
             // "convenient minor"
-            bid(1, BidSuit::Clubs, BidReason::ConvenientMinor)
+            bid(1, BidSuit::Clubs, BidReason::OpeningConvenientMinor)
         }
     } else if
         balanced
         && hcps(20, 22)
     {
         bid(2, BidSuit::NoTrump, BidReason::Todo)
+    } else if
+        hcps(23, MAX_HCPS)
+    {
+        bid(2, BidSuit::Clubs, BidReason::OpeningArtificialVeryStrongHand)
     } else {
         todo!()
     }
