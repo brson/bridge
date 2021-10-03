@@ -1,4 +1,5 @@
 use std::cmp::Ordering;
+use std::convert::TryInto;
 
 #[derive(Copy, Clone)]
 pub struct Card(u8);
@@ -132,8 +133,12 @@ impl AuctionPlayerView {
     }
 
     pub fn suit_distributions(&self) -> [u8; 4] {
-        let spades = self.hand.cards.iter().filter(|c| c.suite() == Suit::Spades);
-        todo!()
+        let diamonds = self.hand.count_suit(Suit::Diamonds);
+        let clubs = self.hand.count_suit(Suit::Clubs);
+        let hearts = self.hand.count_suit(Suit::Hearts);
+        let spades = self.hand.count_suit(Suit::Spades);
+
+        [diamonds, clubs, hearts, spades]
     }
 }
 
@@ -210,5 +215,13 @@ impl Card {
         } else {
             unreachable!()
         }
+    }
+}
+
+impl Hand {
+    fn count_suit(&self, suit: Suit) -> u8 {
+        self.cards.iter().filter(|c| c.suite() == Suit::Diamonds)
+            .count()
+            .try_into().expect("u8")
     }
 }
