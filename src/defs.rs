@@ -114,7 +114,8 @@ impl AuctionPlayerView {
     }
 
     pub fn balanced(&self) -> bool {
-        let mut suits = self.suit_distributions();
+        let mut suits = self.suit_distributions()
+            .map(|(count, _suit)| count);
         suits.sort();
 
         let balanced_dists = [
@@ -126,13 +127,18 @@ impl AuctionPlayerView {
         balanced_dists.iter().any(|balanced| suits == *balanced)
     }
 
-    pub fn suit_distributions(&self) -> [u8; 4] {
+    pub fn suit_distributions(&self) -> [(u8, Suit); 4] {
         let clubs = self.hand.count_suit(Suit::Clubs);
         let diamonds = self.hand.count_suit(Suit::Diamonds);
         let hearts = self.hand.count_suit(Suit::Hearts);
         let spades = self.hand.count_suit(Suit::Spades);
 
-        [clubs, diamonds, hearts, spades]
+        [
+            (clubs, Suit::Clubs),
+            (diamonds, Suit::Diamonds),
+            (hearts, Suit::Hearts),
+            (spades, Suit::Spades),
+        ]
     }
 }
 
