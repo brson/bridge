@@ -26,7 +26,6 @@ pub struct AuctionState {
 
 pub struct AuctionPlayerView {
     pub hand: Hand,
-    pub dealer: Seat,
     pub calls: Vec<PlayerCall>,
 }
 
@@ -79,7 +78,6 @@ impl AuctionState {
     pub fn bidder_view(&self) -> AuctionPlayerView {
         AuctionPlayerView {
             hand: self.bidder_hand(),
-            dealer: self.dealer,
             calls: self.calls.clone()
         }
     }
