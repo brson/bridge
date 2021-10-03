@@ -65,6 +65,14 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
             bid(1, BidSuit::Clubs, BidReason::OpeningConvenientMinor)
         }
     } else if
+        hcps(11, 12)
+    {
+        // marginal cases
+        let long_suit = todo!();
+        let distributional_strength = todo!();
+        let good_quick_tricks = todo!();
+        todo!()
+    } else if
         balanced
         && hcps(15, 17)
     {
