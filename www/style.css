@@ -1,0 +1,7 @@
+body {
+    outline: 1px solid gray;
+}
+
+#table-and-info {
+    justify-content: space-between;
+}
