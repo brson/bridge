@@ -1,3 +1,4 @@
+use log::info;
 use wasm_bindgen::prelude::*;
 
 #[cfg(feature = "wee_alloc")]
@@ -5,8 +6,11 @@ use wasm_bindgen::prelude::*;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-pub fn set_panic_hook() {
+pub fn init() {
     console_error_panic_hook::set_once();
+    console_log::init_with_level(log::Level::Debug);
+
+    info!("bridge wasm initialized");
 }
 
 #[wasm_bindgen]

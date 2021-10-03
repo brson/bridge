@@ -7,4 +7,4 @@ console.log(webpackBundle);
 const bridgeWasm = await webpackBundle.bridgeWasm;
 console.log(bridgeWasm);
 
-
+bridgeWasm.init();
