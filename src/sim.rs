@@ -43,11 +43,8 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
     let five_card_major = hearts >= 5 || spades >= 4;
     let three_card_minor = clubs >= 3 || diamonds >= 3;
 
-    if
-        balanced
-        && hcps(15, 17)
-    {
-        bid(1, BidSuit::NoTrump, BidReason::Todo)
+    if false {
+        unreachable!()
     } else if
         five_card_major
         && hcps(13, 21)
@@ -67,6 +64,11 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
             // "convenient minor"
             bid(1, BidSuit::Clubs, BidReason::OpeningConvenientMinor)
         }
+    } else if
+        balanced
+        && hcps(15, 17)
+    {
+        bid(1, BidSuit::NoTrump, BidReason::Todo)
     } else if
         balanced
         && hcps(20, 22)
