@@ -23,27 +23,29 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
     assert!(view.opening());
 
     let hcps = view.high_card_points();
+    let hcps = |low, high| {
+        (low..=high).contains(&hcps)
+    };
+
     let diamonds = view.hand.count_suit(Suit::Diamonds);
     let clubs = view.hand.count_suit(Suit::Clubs);
     let hearts = view.hand.count_suit(Suit::Hearts);
     let spades = view.hand.count_suit(Suit::Spades);
 
-    let have_12plus_hcps = 12 <= hcps;
-    let have_15_to_17_hcps = 15 <= hcps && hcps <= 117;
     let balanced = view.balanced();
 
     if
-        have_15_to_17_hcps
+        hcps(15, 17)
         && balanced
     {
         bid(1, BidSuit::NoTrump)
     } else if
-        (13..=21).contains(&hcps)
+        hcps(13, 21)
         && hearts >= 5
     {
         bid(1, BidSuit::Hearts)
     } else if
-        (13..=21).contains(&hcps)
+        hcps(13, 21)
         && spades >= 5
     {
         bid(1, BidSuit::Spades)
