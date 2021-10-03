@@ -33,7 +33,6 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
     let spades = view.hand.count_suit(Suit::Spades);
 
     let balanced = view.balanced();
-
     let five_card_major = hearts >= 5 || spades >= 4;
     let three_card_minor = clubs >= 3 || diamonds >= 3;
 
@@ -46,7 +45,7 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         five_card_major
         && hcps(13, 21)
     {
-        if hearts >= 4 {
+        if hearts >= 5 {
             bid(1, BidSuit::Hearts)
         } else {
             bid(1, BidSuit::Spades)
@@ -55,7 +54,12 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         three_card_minor
         && hcps(13, 21)
     {
-        todo!()
+        if diamonds > clubs {
+            bid(1, BidSuit::Diamonds)
+        } else {
+            // convenient minor
+            bid(1, BidSuit::Clubs)
+        }
     } else {
         todo!()
     }
