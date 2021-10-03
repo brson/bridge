@@ -45,12 +45,12 @@ pub enum Call {
 
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub struct Bid {
-    pub suit: Suit,
+    pub suit: BidSuit,
     pub level: Level,
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
-pub enum Suit {
+pub enum BidSuit {
     NoTrump,
     Spades,
     Hearts,
@@ -124,6 +124,7 @@ impl AuctionPlayerView {
     }
 
     pub fn suit_distributions(&self) -> [u8; 4] {
+        //let spades = self.hand.cards.iter().filter(|c| c.suite() == Suite::Spades
         todo!()
     }
 }
