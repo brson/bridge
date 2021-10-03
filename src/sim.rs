@@ -14,6 +14,7 @@ pub struct SimulatedCalls {
 pub enum BidReason {
     Todo,
     OpeningBalanced15To17(OpeningBalanced15To17),
+    OpeningFiveCardMajor(OpeningFiveCardMajor),
     OpeningConvenientMinor,
     OpeningArtificialVeryStrongHand,
     OpeningWeakTwoBid,
@@ -23,6 +24,12 @@ pub enum OpeningBalanced15To17 {
     NoLongSuit,
     FiveCardMajor,
     ThreeCardMinor,
+}
+
+pub enum OpeningFiveCardMajor {
+    SpadesGreaterThanHearts,
+    SpadesEqualHearts,
+    HeartsLessThanSpades,
 }
 
 pub fn simulate_call(view: &AuctionPlayerView) -> SimulatedCalls {
@@ -73,19 +80,24 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         && five_card_major
     {
         if spades > hearts {
-            bid(1, BidSuit::Spades, BidReason::Todo)
+            bid(1, BidSuit::Spades, BidReason::OpeningFiveCardMajor(OpeningFiveCardMajor::SpadesGreaterThanHearts))
+        } else if spades == hearts {
+            bid(1, BidSuit::Hearts, BidReason::OpeningFiveCardMajor(OpeningFiveCardMajor::SpadesEqualHearts))
         } else {
-            bid(1, BidSuit::Hearts, BidReason::Todo)
+            bid(1, BidSuit::Hearts, BidReason::OpeningFiveCardMajor(OpeningFiveCardMajor::HeartsLessThanSpades))
         }
     } else if
         hcps(13, 21)
         && three_card_minor
     {
+        let convenient_minor = clubs.max(diamonds) == 3;
+
         if diamonds > clubs {
             bid(1, BidSuit::Diamonds, BidReason::Todo)
+        } else if clubs == diamonds {
+            bid(1, BidSuit::Clubs, BidReason::Todo)
         } else {
-            // "convenient minor"
-            bid(1, BidSuit::Clubs, BidReason::OpeningConvenientMinor)
+            bid(1, BidSuit::Clubs, BidReason::Todo)
         }
     } else if
         hcps(11, 12)
