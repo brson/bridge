@@ -212,9 +212,3 @@ impl Card {
         }
     }
 }
-
-impl PartialOrd for Bid {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        todo!()
-    }
-}
