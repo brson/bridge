@@ -27,15 +27,15 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         (low..=high).contains(&hcps)
     };
 
-    let diamonds = view.hand.count_suit(Suit::Diamonds);
     let clubs = view.hand.count_suit(Suit::Clubs);
+    let diamonds = view.hand.count_suit(Suit::Diamonds);
     let hearts = view.hand.count_suit(Suit::Hearts);
     let spades = view.hand.count_suit(Suit::Spades);
 
     let balanced = view.balanced();
 
-    let five_card_major = hearts >= 5 || clubs >= 4;
-    let three_card_minor = diamonds >= 3 || clubs >= 3;
+    let five_card_major = hearts >= 5 || spades >= 4;
+    let three_card_minor = clubs >= 3 || diamonds >= 3;
 
     if
         balanced
