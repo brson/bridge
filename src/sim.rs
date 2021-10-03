@@ -34,21 +34,28 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
 
     let balanced = view.balanced();
 
+    let five_card_major = hearts >= 5 || clubs >= 4;
+    let three_card_minor = diamonds >= 3 || clubs >= 3;
+
     if
-        hcps(15, 17)
-        && balanced
+        balanced
+        && hcps(15, 17)
     {
         bid(1, BidSuit::NoTrump)
     } else if
-        hcps(13, 21)
-        && hearts >= 5
+        five_card_major
+        && hcps(13, 21)
     {
-        bid(1, BidSuit::Hearts)
+        if hearts >= 4 {
+            bid(1, BidSuit::Hearts)
+        } else {
+            bid(1, BidSuit::Spades)
+        }
     } else if
-        hcps(13, 21)
-        && spades >= 5
+        three_card_minor
+        && hcps(13, 21)
     {
-        bid(1, BidSuit::Spades)
+        todo!()
     } else {
         todo!()
     }

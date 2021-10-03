@@ -46,8 +46,8 @@ pub enum Call {
 
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub struct Bid {
-    pub suit: BidSuit,
     pub level: Level,
+    pub suit: BidSuit,
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
