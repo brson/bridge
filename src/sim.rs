@@ -9,8 +9,6 @@ pub struct SimulatedCalls {
 }
 
 pub fn simulate_call(view: &AuctionPlayerView) -> SimulatedCalls {
-    let player = view.next_player();
-
     let opening = view.opening();
 
     if opening {
