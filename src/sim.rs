@@ -54,10 +54,10 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         hcps(13, 21)
         && five_card_major
     {
-        if hearts >= 5 {
-            bid(1, BidSuit::Hearts, BidReason::Todo)
-        } else {
+        if spades > hearts {
             bid(1, BidSuit::Spades, BidReason::Todo)
+        } else {
+            bid(1, BidSuit::Hearts, BidReason::Todo)
         }
     } else if
         hcps(13, 21)
