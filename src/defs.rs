@@ -54,7 +54,15 @@ pub enum BidSuit {
     NoTrump,
     Spades,
     Hearts,
-    Diamods,
+    Diamonds,
+    Clubs,
+}
+
+#[derive(Eq, PartialEq, Copy, Clone)]
+pub enum Suit {
+    Spades,
+    Hearts,
+    Diamonds,
     Clubs,
 }
 
@@ -124,7 +132,7 @@ impl AuctionPlayerView {
     }
 
     pub fn suit_distributions(&self) -> [u8; 4] {
-        //let spades = self.hand.cards.iter().filter(|c| c.suite() == Suite::Spades
+        let spades = self.hand.cards.iter().filter(|c| c.suite() == Suit::Spades);
         todo!()
     }
 }
@@ -162,10 +170,10 @@ impl Seat {
     }
 }
 
-const ACE_IDX: u8 = 14;
-const KING_IDX: u8 = 13;
-const QUEEN_IDX: u8 = 12;
-const JACK_IDX: u8 = 11;
+const ACE_FACE_VALUE: u8 = 14;
+const KING_FACE_VALUE: u8 = 13;
+const QUEEN_FACE_VALUE: u8 = 12;
+const JACK_FACE_VALUE: u8 = 11;
 
 const ACE_POINTS: u8 = 4;
 const KING_POINTS: u8 = 3;
@@ -174,14 +182,33 @@ const JACK_POINTS: u8 = 1;
 
 impl Card {
     pub fn points(&self) -> u8 {
-        assert!(self.0 <= ACE_IDX);
-        assert!(self.0 >= 2);
-        match self.0 {
-            ACE_IDX => ACE_POINTS,
-            KING_IDX => KING_POINTS,
-            QUEEN_IDX => QUEEN_POINTS,
-            JACK_IDX => JACK_POINTS,
+        let face_value = self.face_value();
+        assert!(face_value <= ACE_FACE_VALUE);
+        assert!(face_value >= 2);
+        match face_value {
+            ACE_FACE_VALUE => ACE_POINTS,
+            KING_FACE_VALUE => KING_POINTS,
+            QUEEN_FACE_VALUE => QUEEN_POINTS,
+            JACK_FACE_VALUE => JACK_POINTS,
             _ => 0,
+        }
+    }
+
+    pub fn face_value(&self) -> u8 {
+        self.0 % 13 + 2
+    }
+
+    pub fn suite(&self) -> Suit {
+        if (0..=12).contains(&self.0) {
+            Suit::Diamonds
+        } else if (13..=25).contains(&self.0) {
+            Suit::Clubs
+        } else if (26..=38).contains(&self.0) {
+            Suit::Hearts
+        } else if (39..=51).contains(&self.0) {
+            Suit::Spades
+        } else {
+            unreachable!()
         }
     }
 }
