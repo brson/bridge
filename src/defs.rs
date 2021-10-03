@@ -103,10 +103,6 @@ impl AuctionState {
 }
 
 impl AuctionPlayerView {
-    pub fn player(&self) -> Seat {
-        maybe_next_player(&self.calls, self.dealer).expect("bidding not open")
-    }
-
     pub fn opening(&self) -> bool {
         self.calls.iter().all(|call| call.call == Call::Pass)
     }
