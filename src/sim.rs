@@ -57,7 +57,7 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         if diamonds > clubs {
             bid(1, BidSuit::Diamonds)
         } else {
-            // convenient minor
+            // "convenient minor"
             bid(1, BidSuit::Clubs)
         }
     } else {
