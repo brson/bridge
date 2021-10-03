@@ -1,5 +1,3 @@
-// http://www.kwbridge.com/basics.htm
-
 #![allow(unused)]
 
 pub mod defs;
