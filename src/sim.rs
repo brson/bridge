@@ -13,9 +13,16 @@ pub struct SimulatedCalls {
 
 pub enum BidReason {
     Todo,
+    OpeningBalanced15To17(OpeningBalanced15To17),
     OpeningConvenientMinor,
     OpeningArtificialVeryStrongHand,
     OpeningWeakTwoBid,
+}
+
+pub enum OpeningBalanced15To17 {
+    NoLongSuit,
+    FiveCardMajor,
+    ThreeCardMinor,
 }
 
 pub fn simulate_call(view: &AuctionPlayerView) -> SimulatedCalls {
@@ -51,7 +58,16 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         hcps(15, 17)
         && balanced
     {
-        bid(1, BidSuit::NoTrump, BidReason::Todo)
+        let reason = {
+            if five_card_major {
+                BidReason::OpeningBalanced15To17(OpeningBalanced15To17::FiveCardMajor)
+            } else if three_card_minor {
+                BidReason::OpeningBalanced15To17(OpeningBalanced15To17::ThreeCardMinor)
+            } else {
+                BidReason::OpeningBalanced15To17(OpeningBalanced15To17::NoLongSuit)
+            }
+        };
+        bid(1, BidSuit::NoTrump, reason)
     } else if
         hcps(13, 21)
         && five_card_major
