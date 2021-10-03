@@ -94,15 +94,11 @@ impl AuctionState {
     }
 
     pub fn finished(&self) -> bool {
-        self.maybe_next_player().is_some()
+        maybe_next_player(&self.calls, self.dealer).is_some()
     }
 
     pub fn next_player(&self) -> Seat {
-        self.maybe_next_player().expect("bidding not open")
-    }
-
-    pub fn maybe_next_player(&self) -> Option<Seat> {
-        maybe_next_player(&self.calls, self.dealer)
+        maybe_next_player(&self.calls, self.dealer).expect("bidding not open")
     }
 }
 
