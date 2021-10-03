@@ -109,6 +109,23 @@ impl AuctionPlayerView {
     pub fn high_card_points(&self) -> u8 {
         self.hand.cards.iter().map(Card::points).sum()
     }
+
+    pub fn balanced(&self) -> bool {
+        let mut suits = self.suit_distributions();
+        suits.sort();
+
+        let balanced_dists = [
+            [3, 3, 3, 4],
+            [2, 3, 4, 4],
+            [2, 3, 3, 5],
+        ];
+
+        balanced_dists.iter().any(|balanced| suits == *balanced)
+    }
+
+    pub fn suit_distributions(&self) -> [u8; 4] {
+        todo!()
+    }
 }
 
 fn maybe_next_player(calls: &[PlayerCall], dealer: Seat) -> Option<Seat> {
