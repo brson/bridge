@@ -101,10 +101,10 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
     }
 }
 
-fn bid(level: u8, suit: BidSuit, reason: BidReason) -> ! {
+fn bid(level: u8, suit: BidSuit, reason: BidReason) -> SimulatedCalls {
     todo!()
 }
 
-fn pass() -> ! {
+fn pass() -> SimulatedCalls {
     todo!()
 }
