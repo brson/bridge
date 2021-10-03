@@ -52,19 +52,19 @@ pub struct Bid {
 
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub enum BidSuit {
-    NoTrump,
-    Spades,
-    Hearts,
-    Diamonds,
     Clubs,
+    Diamonds,
+    Hearts,
+    Spades,
+    NoTrump,
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub enum Suit {
-    Spades,
-    Hearts,
-    Diamonds,
     Clubs,
+    Diamonds,
+    Hearts,
+    Spades,
 }
 
 #[derive(Eq, PartialEq, Copy, Clone)]
@@ -125,12 +125,12 @@ impl AuctionPlayerView {
     }
 
     pub fn suit_distributions(&self) -> [u8; 4] {
-        let diamonds = self.hand.count_suit(Suit::Diamonds);
         let clubs = self.hand.count_suit(Suit::Clubs);
+        let diamonds = self.hand.count_suit(Suit::Diamonds);
         let hearts = self.hand.count_suit(Suit::Hearts);
         let spades = self.hand.count_suit(Suit::Spades);
 
-        [diamonds, clubs, hearts, spades]
+        [clubs, diamonds, hearts, spades]
     }
 }
 
@@ -197,9 +197,9 @@ impl Card {
 
     pub fn suite(&self) -> Suit {
         if (0..=12).contains(&self.0) {
-            Suit::Diamonds
-        } else if (13..=25).contains(&self.0) {
             Suit::Clubs
+        } else if (13..=25).contains(&self.0) {
+            Suit::Diamonds
         } else if (26..=38).contains(&self.0) {
             Suit::Hearts
         } else if (39..=51).contains(&self.0) {
