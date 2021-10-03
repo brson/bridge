@@ -46,6 +46,11 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
     if false {
         unreachable!()
     } else if
+        hcps(15, 17)
+        && balanced
+    {
+        bid(1, BidSuit::NoTrump, BidReason::Todo)
+    } else if
         hcps(13, 21)
         && five_card_major
     {
@@ -73,11 +78,6 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         let good_quick_tricks = todo!();
         todo!()
     } else if
-        hcps(15, 17)
-        && balanced
-    {
-        bid(1, BidSuit::NoTrump, BidReason::Todo)
-    } else if
         hcps(20, 22)
         && balanced
     {
@@ -86,6 +86,16 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         hcps(23, MAX_HCPS)
     {
         bid(2, BidSuit::Clubs, BidReason::OpeningArtificialVeryStrongHand)
+    } else if
+        hcps(5, 9)
+    {
+        // weak hand
+        todo!()
+    } else if
+        hcps(10, 10)
+    {
+        // don't know any heuristics for 10 hcps
+        todo!()
     } else {
         todo!()
     }
