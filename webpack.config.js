@@ -7,6 +7,9 @@ const dist = path.resolve(__dirname, "dist");
 module.exports = {
     target: "web",
     mode: "development",
+    experiments: {
+        asyncWebAssembly: true
+    },
     entry: {
         index: "./js/webpack-bundle.js"
     },
