@@ -9,6 +9,11 @@ use crate::defs::{
 pub struct SimulatedCalls {
 }
 
+pub enum BidReason {
+    Todo,
+    ConvenientMinor,
+}
+
 pub fn simulate_call(view: &AuctionPlayerView) -> SimulatedCalls {
     let opening = view.opening();
 
@@ -40,31 +45,31 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         balanced
         && hcps(15, 17)
     {
-        bid(1, BidSuit::NoTrump)
+        bid(1, BidSuit::NoTrump, BidReason::Todo)
     } else if
         five_card_major
         && hcps(13, 21)
     {
         if hearts >= 5 {
-            bid(1, BidSuit::Hearts)
+            bid(1, BidSuit::Hearts, BidReason::Todo)
         } else {
-            bid(1, BidSuit::Spades)
+            bid(1, BidSuit::Spades, BidReason::Todo)
         }
     } else if
         three_card_minor
         && hcps(13, 21)
     {
         if diamonds > clubs {
-            bid(1, BidSuit::Diamonds)
+            bid(1, BidSuit::Diamonds, BidReason::Todo)
         } else {
             // "convenient minor"
-            bid(1, BidSuit::Clubs)
+            bid(1, BidSuit::Clubs, BidReason::ConvenientMinor)
         }
     } else {
         todo!()
     }
 }
 
-fn bid(level: u8, suit: BidSuit) -> ! {
+fn bid(level: u8, suit: BidSuit, reason: BidReason) -> ! {
     todo!()
 }
