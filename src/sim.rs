@@ -97,10 +97,14 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         // don't know any heuristics for 10 hcps
         todo!()
     } else {
-        todo!()
+        pass()
     }
 }
 
 fn bid(level: u8, suit: BidSuit, reason: BidReason) -> ! {
+    todo!()
+}
+
+fn pass() -> ! {
     todo!()
 }
