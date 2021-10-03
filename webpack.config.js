@@ -15,7 +15,8 @@ module.exports = {
     },
     output: {
         path: dist,
-        filename: "[name].js"
+        filename: "webpack-bundle.js",
+        library: "webpackBundle"
     },
     devServer: {
         contentBase: dist,
