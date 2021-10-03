@@ -104,14 +104,9 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
     {
         bid(2, BidSuit::Clubs, BidReason::OpeningArtificialVeryStrongHand)
     } else if
-        hcps(5, 9)
+        hcps(5, 10)
     {
         // weak hand
-        todo!()
-    } else if
-        hcps(10, 10)
-    {
-        // don't know any heuristics for 10 hcps
         todo!()
     } else {
         pass()
