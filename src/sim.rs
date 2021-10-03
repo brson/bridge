@@ -46,8 +46,8 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
     if false {
         unreachable!()
     } else if
-        five_card_major
-        && hcps(13, 21)
+        hcps(13, 21)
+        && five_card_major
     {
         if hearts >= 5 {
             bid(1, BidSuit::Hearts, BidReason::Todo)
@@ -55,8 +55,8 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
             bid(1, BidSuit::Spades, BidReason::Todo)
         }
     } else if
-        three_card_minor
-        && hcps(13, 21)
+        hcps(13, 21)
+        && three_card_minor
     {
         if diamonds > clubs {
             bid(1, BidSuit::Diamonds, BidReason::Todo)
@@ -73,13 +73,13 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
         let good_quick_tricks = todo!();
         todo!()
     } else if
-        balanced
-        && hcps(15, 17)
+        hcps(15, 17)
+        && balanced
     {
         bid(1, BidSuit::NoTrump, BidReason::Todo)
     } else if
-        balanced
-        && hcps(20, 22)
+        hcps(20, 22)
+        && balanced
     {
         bid(2, BidSuit::NoTrump, BidReason::Todo)
     } else if
