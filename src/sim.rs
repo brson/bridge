@@ -1,4 +1,5 @@
 // http://www.kwbridge.com/basics.htm
+// http://www.kwbridge.com/weak2.htm
 
 use crate::defs::{
     AuctionPlayerView,
