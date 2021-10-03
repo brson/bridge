@@ -212,7 +212,7 @@ impl Card {
 
 impl Hand {
     pub fn count_suit(&self, suit: Suit) -> u8 {
-        self.cards.iter().filter(|c| c.suite() == Suit::Diamonds)
+        self.cards.iter().filter(|c| c.suite() == suit)
             .count()
             .try_into().expect("u8")
     }
