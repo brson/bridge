@@ -78,12 +78,16 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
                 Some(BidSuit::Hearts)
             } else if spades > 5 {
                 Some(BidSuit::Spades)
+            } else if clubs > 3 && clubs >= diamonds {
+                Some(BidSuit::Clubs)
+            } else if diamonds > 3 {
+                Some(BidSuit::Diamonds)
             } else {
                 None
             }
         };
         let distributional_strength = todo!();
-        let good_quick_tricks = None; // todo
+        let good_quick_tricks = todo!();
 
         if let Some(long_suit) = long_suit {
             bid(1, long_suit, BidReason::Todo)
