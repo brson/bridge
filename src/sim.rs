@@ -65,6 +65,11 @@ fn play_opening(view: &AuctionPlayerView) -> SimulatedCalls {
             // "convenient minor"
             bid(1, BidSuit::Clubs, BidReason::ConvenientMinor)
         }
+    } else if
+        balanced
+        && hcps(20, 22)
+    {
+        bid(2, BidSuit::NoTrump, BidReason::Todo)
     } else {
         todo!()
     }
