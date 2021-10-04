@@ -22,6 +22,12 @@ body {
     flex-direction: column;
 }
 
+.suit-♦,
+.suit-♥
+{
+    color: red;
+}
+
 .card {
     font-family: monospace;
 }

@@ -76,4 +76,11 @@ export function setCard(seat, index, rank, suit) {
 
     rankElt.innerText = rank;
     suitElt.innerText = suit;
+
+    suitElt.classList.remove("suit-clubs");
+    suitElt.classList.remove("suit-diamonds");
+    suitElt.classList.remove("suit-hearts");
+    suitElt.classList.remove("suit-spades");    
+
+    suitElt.classList.add(`suit-${suit}`);
 }
