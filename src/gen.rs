@@ -1,7 +1,11 @@
 use crate::defs::*;
+use rand::{SeedableRng, Rng};
+use rand_chacha::ChaCha8Rng;
 
 pub fn random_auction(seed: u32) -> AuctionState {
-    let [north, east, south, west] = deal();
+    let mut rng = ChaCha8Rng::seed_from_u64(seed.into());
+
+    let [north, east, south, west] = deal(&mut rng);
 
     AuctionState {
         deck: Deck {
@@ -15,7 +19,7 @@ pub fn random_auction(seed: u32) -> AuctionState {
     }
 }
 
-fn deal() -> [Hand; 4] {
+fn deal(rng: &mut impl Rng) -> [Hand; 4] {
     [
         deal_one(),
         deal_one(),
