@@ -3,7 +3,7 @@ use serde_json;
 
 mod exports {
     use wasm_bindgen::prelude::*;
-    use super::{api, serialize};
+    use super::{api, serialize, deserialize};
 
     pub type Json = String;
 
@@ -16,12 +16,20 @@ mod exports {
     pub fn new_game() -> Json {
         serialize(api::new_game())
     }
+
+    #[wasm_bindgen]
+    pub fn card_value_and_suit(game: Json, card: u8) -> Json {
+        serialize(api::card_value_and_suit(
+            deserialize(game),
+            card
+        ))
+    }
 }
 
 mod api {
     use log::info;
     use serde::{Serialize, Deserialize};
-    use crate::defs::AuctionState;
+    use crate::defs::{AuctionState, Suit};
     use crate::gen;
 
     #[derive(Serialize, Deserialize)]
@@ -46,10 +54,20 @@ mod api {
             auction
         }
     }
+
+    pub fn card_value_and_suit(game: Game, card: u8) -> (u8, Suit) {
+        todo!()
+    }
 }
 
 fn serialize<T>(value: T) -> String
 where T: Serialize
 {
     serde_json::to_string(&value).expect("json")
+}
+
+fn deserialize<T>(s: String) -> T
+where T: for <'de> Deserialize<'de> + 'static
+{
+    serde_json::from_str(&s).expect("json")
 }
