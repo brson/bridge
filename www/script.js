@@ -5,6 +5,9 @@ import * as bridge from "./bridge.js";
 async function main() {
     initializeTable();
     randomizeCards();
+
+    let game = bridge.newGame();
+    console.log(game);
 }
 
 function initializeTable() {

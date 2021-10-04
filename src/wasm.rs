@@ -8,8 +8,3 @@ pub fn init() {
 
     info!("bridge wasm initialized");
 }
-
-#[wasm_bindgen]
-extern {
-    fn alert(s: &str);
-}
