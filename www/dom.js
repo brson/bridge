@@ -84,3 +84,19 @@ export function setCard(seat, index, rank, suit) {
 
     suitElt.classList.add(`suit-${suit}`);
 }
+
+export function updateHands(game) {
+    let deck = game.auction.deck;
+    updateHand(north, deck.north);
+    updateHand(east, deck.east);
+    updateHand(south, deck.south);
+    updateHand(west, deck.west);
+}
+
+function updateHand(seat, hand) {
+    let index = 0;
+    for (let card of hand.cards) {
+        setCard(seat, index, rank, suit);
+        index += 1;
+    }
+}
