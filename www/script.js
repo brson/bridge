@@ -4,7 +4,6 @@ import * as bridge from "./bridge.js";
 
 async function main() {
     initializeTable();
-    randomizeCards();
 
     let game = bridge.newGame();
 
@@ -27,16 +26,6 @@ function initializeTable() {
             cardsRow.appendChild(newCard);
         }
         seat.appendChild(newHand);
-    }
-}
-
-function randomizeCards() {
-    for (let seat of dom.seats) {
-        for (let card = 0; card < 13; card++) {
-            let randomRank = utils.randomElement(dom.ranks);
-            let randomSuit = utils.randomElement(dom.suits);
-            dom.setCard(seat, card, randomRank, randomSuit);
-        }
     }
 }
 
