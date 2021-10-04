@@ -32,3 +32,7 @@ export function getElementAndAssert(name) {
     console.assert(elt); 
    return elt;
 }
+
+export function randomElement(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
