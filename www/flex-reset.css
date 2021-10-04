@@ -18,8 +18,8 @@
     max-width: inherit;
     max-height: inherit;
     box-shadow: inherit;
-    outline: inherit;
 
+    outline: 0;
     margin: 0;
     border: 0 solid black;
     padding: 0;

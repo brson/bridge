@@ -4,11 +4,16 @@
     outline: 0;
 }
 
+.noborder {
+    padding: 0;
+    outline: 0;
+}
+
 .cards {
     gap: 0;
 }
 
-body {
+body * {
     outline: 1px solid gray;
 }
 
@@ -16,6 +21,12 @@ body {
     justify-content: space-between;
 }
 
+#table > * {
+    width: 100%;
+}
+
+#table-east .hand,
+#table-west .hand,
 #table-east .cards,
 #table-west .cards
 {
@@ -33,7 +44,20 @@ body {
 }
 
 #table-center {
+    flex-grow: 100;
+}
+
+#table-north,
+#table-east,
+#table-west,
+#table-south
+{
     flex-grow: 1;
+    min-width: 6em;
+}
+
+#table-east .hard {
+    
 }
 
 #table-north > span,
