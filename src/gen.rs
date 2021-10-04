@@ -25,5 +25,9 @@ fn deal() -> [Hand; 4] {
 }
 
 fn deal_one() -> Hand {
-    todo!()
+    Hand {
+        cards: [
+            Card::from(0); 13
+        ]
+    }
 }

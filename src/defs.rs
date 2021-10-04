@@ -252,3 +252,10 @@ impl Suit {
         }
     }
 }
+
+impl From<u8> for Card {
+    fn from(v: u8) -> Card {
+        assert!(v < 52);
+        Card(0)
+    }
+}
