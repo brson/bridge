@@ -1,3 +1,9 @@
+.quiet {
+    padding: 0;
+    gap: 0;
+    outline: 0;
+}
+
 body {
     outline: 1px solid gray;
 }
@@ -6,3 +12,24 @@ body {
     justify-content: space-between;
 }
 
+#table-east .cards,
+#table-west .cards
+{
+    flex-direction: column;
+}
+
+.card {
+    font-family: monospace;
+}
+
+#table-center {
+    flex-grow: 1;
+}
+
+#table-north > span,
+#table-east > span,
+#table-west > span,
+#table-south > span
+{
+    text-align: center;
+}
