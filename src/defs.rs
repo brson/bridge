@@ -1,9 +1,8 @@
 use std::cmp::Ordering;
 use std::convert::TryInto;
+use serde::{Serialize, Deserialize};
 
-#[derive(Copy, Clone)]
-pub struct Card(u8);
-
+#[derive(Serialize, Deserialize)]
 #[derive(Copy, Clone)]
 pub struct Deck {
     pub north: Hand,
@@ -12,11 +11,17 @@ pub struct Deck {
     pub west: Hand,
 }
 
+#[derive(Serialize, Deserialize)]
 #[derive(Copy, Clone)]
 pub struct Hand {
     pub cards: [Card; 13],
 }
 
+#[derive(Serialize, Deserialize)]
+#[derive(Copy, Clone)]
+pub struct Card(u8);
+
+#[derive(Serialize, Deserialize)]
 #[derive(Clone)]
 pub struct AuctionState {
     pub deck: Deck,
@@ -29,12 +34,14 @@ pub struct AuctionPlayerView {
     pub calls: Vec<PlayerCall>,
 }
 
+#[derive(Serialize, Deserialize)]
 #[derive(Copy, Clone)]
 pub struct PlayerCall {
     pub player: Seat,
     pub call: Call,
 }
 
+#[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub enum Call {
     Bid(Bid),
@@ -43,12 +50,14 @@ pub enum Call {
     Redouble,
 }
 
+#[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub struct Bid {
     pub level: Level,
     pub suit: BidSuit,
 }
 
+#[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub enum BidSuit {
     Clubs,
@@ -58,6 +67,7 @@ pub enum BidSuit {
     NoTrump,
 }
 
+#[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub enum Suit {
     Clubs,
@@ -66,9 +76,11 @@ pub enum Suit {
     Spades,
 }
 
+#[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub struct Level(u8);
 
+#[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
 pub enum Seat {
     North, South, East, West

@@ -21,10 +21,13 @@ mod exports {
 mod api {
     use log::info;
     use serde::{Serialize, Deserialize};
+    use crate::defs::AuctionState;
+    use crate::gen;
 
     #[derive(Serialize, Deserialize)]
     pub struct Game {
-        name: String,
+        seed: u32,
+        auction: AuctionState,
     }
 
     pub fn init() {
@@ -35,8 +38,12 @@ mod api {
     }
 
     pub fn new_game() -> Game {
+        let seed = 0;
+        let auction = gen::random_auction(seed);
+
         Game {
-            name: "hi".to_string()
+            seed,
+            auction
         }
     }
 }
