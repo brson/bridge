@@ -8,6 +8,7 @@ async function main() {
 
     let game = bridge.newGame();
     console.log(game);
+    console.log(JSON.stringify(game));
 }
 
 function initializeTable() {

@@ -24,18 +24,26 @@ fn deal(rng: &mut impl Rng) -> [Hand; 4] {
 
     let ref mut deck = deck.into_iter();
 
-    [
+    let hands = [
         deal_one(deck),
         deal_one(deck),
         deal_one(deck),
         deal_one(deck),
-    ]
+    ];
+
+    assert!(deck.next().is_none());
+
+    hands
 }
 
 fn deal_one(deck: &mut impl Iterator<Item = u8>) -> Hand {
+    let mut card = || Card::from(deck.next().expect("deck"));
     Hand {
         cards: [
-            Card::from(0); 13
+            card(), card(), card(), card(),
+            card(), card(), card(), card(),
+            card(), card(), card(), card(),
+            card()
         ]
     }
 }

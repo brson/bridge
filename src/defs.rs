@@ -4,6 +4,7 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize)]
 #[derive(Copy, Clone)]
+#[derive(Debug)]
 pub struct Deck {
     pub north: Hand,
     pub east: Hand,
@@ -13,16 +14,19 @@ pub struct Deck {
 
 #[derive(Serialize, Deserialize)]
 #[derive(Copy, Clone)]
+#[derive(Debug)]
 pub struct Hand {
     pub cards: [Card; 13],
 }
 
 #[derive(Serialize, Deserialize)]
 #[derive(Copy, Clone)]
+#[derive(Debug)]
 pub struct Card(u8);
 
 #[derive(Serialize, Deserialize)]
 #[derive(Clone)]
+#[derive(Debug)]
 pub struct AuctionState {
     pub deck: Deck,
     pub dealer: Seat,
@@ -36,6 +40,7 @@ pub struct AuctionPlayerView {
 
 #[derive(Serialize, Deserialize)]
 #[derive(Copy, Clone)]
+#[derive(Debug)]
 pub struct PlayerCall {
     pub player: Seat,
     pub call: Call,
@@ -43,6 +48,7 @@ pub struct PlayerCall {
 
 #[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
+#[derive(Debug)]
 pub enum Call {
     Bid(Bid),
     Pass,
@@ -52,6 +58,7 @@ pub enum Call {
 
 #[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
+#[derive(Debug)]
 pub struct Bid {
     pub level: Level,
     pub suit: BidSuit,
@@ -59,6 +66,7 @@ pub struct Bid {
 
 #[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
+#[derive(Debug)]
 pub enum BidSuit {
     Clubs,
     Diamonds,
@@ -69,6 +77,7 @@ pub enum BidSuit {
 
 #[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
+#[derive(Debug)]
 pub enum Suit {
     Clubs,
     Diamonds,
@@ -78,10 +87,12 @@ pub enum Suit {
 
 #[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
+#[derive(Debug)]
 pub struct Level(u8);
 
 #[derive(Serialize, Deserialize)]
 #[derive(Eq, PartialEq, Copy, Clone)]
+#[derive(Debug)]
 pub enum Seat {
     North, South, East, West
 }
@@ -256,6 +267,6 @@ impl Suit {
 impl From<u8> for Card {
     fn from(v: u8) -> Card {
         assert!(v < 52);
-        Card(0)
+        Card(v)
     }
 }
