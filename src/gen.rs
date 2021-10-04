@@ -1,5 +1,6 @@
 use crate::defs::*;
 use rand::{SeedableRng, Rng};
+use rand::seq::{SliceRandom};
 use rand_chacha::ChaCha8Rng;
 
 pub fn random_auction(seed: u32) -> AuctionState {
@@ -21,6 +22,8 @@ pub fn random_auction(seed: u32) -> AuctionState {
 
 fn deal(rng: &mut impl Rng) -> [Hand; 4] {
     let mut deck: Vec<u8> = (0..).take(52).collect();
+
+    deck.shuffle(rng);
 
     let ref mut deck = deck.into_iter();
 
