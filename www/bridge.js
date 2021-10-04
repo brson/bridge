@@ -6,4 +6,5 @@ const bridgeWasm = await webpackBundle.bridgeWasm;
 bridgeWasm.init();
 
 export function newGame() {
+    return bridgeWasm.new_game();
 }
