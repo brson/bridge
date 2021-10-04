@@ -20,15 +20,19 @@ pub fn random_auction(seed: u32) -> AuctionState {
 }
 
 fn deal(rng: &mut impl Rng) -> [Hand; 4] {
+    let mut deck: Vec<u8> = (0..).take(52).collect();
+
+    let ref mut deck = deck.into_iter();
+
     [
-        deal_one(),
-        deal_one(),
-        deal_one(),
-        deal_one(),
+        deal_one(deck),
+        deal_one(deck),
+        deal_one(deck),
+        deal_one(deck),
     ]
 }
 
-fn deal_one() -> Hand {
+fn deal_one(deck: &mut impl Iterator<Item = u8>) -> Hand {
     Hand {
         cards: [
             Card::from(0); 13
