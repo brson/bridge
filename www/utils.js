@@ -26,3 +26,9 @@ export function removeAllChildren(elt) {
         elt.removeChild(elt.firstChild);
     }
 }
+
+export function getElementAndAssert(name) {
+    let elt = document.getElementById(name);
+    console.assert(elt); 
+   return elt;
+}
