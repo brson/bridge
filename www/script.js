@@ -7,8 +7,6 @@ async function main() {
     randomizeCards();
 
     let game = bridge.newGame();
-    console.log(game);
-    console.log(JSON.stringify(game));
 
     dom.updateHands(game);
 }

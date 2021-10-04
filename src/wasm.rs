@@ -18,18 +18,15 @@ mod exports {
     }
 
     #[wasm_bindgen]
-    pub fn card_value_and_suit(game: Json, card: u8) -> Json {
-        serialize(api::card_value_and_suit(
-            deserialize(game),
-            card
-        ))
+    pub fn card_value_and_suit(card: u8) -> Json {
+        serialize(api::card_value_and_suit(card))
     }
 }
 
 mod api {
     use log::info;
     use serde::{Serialize, Deserialize};
-    use crate::defs::{AuctionState, Suit};
+    use crate::defs::*;
     use crate::gen;
 
     #[derive(Serialize, Deserialize)]
@@ -55,8 +52,9 @@ mod api {
         }
     }
 
-    pub fn card_value_and_suit(game: Game, card: u8) -> (u8, Suit) {
-        todo!()
+    pub fn card_value_and_suit(card: u8) -> (u8, Suit) {
+        let card = Card::from(card);
+        (card.face_value(), card.suit())
     }
 }
 

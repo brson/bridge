@@ -1,3 +1,4 @@
+import * as bridge from "./bridge.js";
 import * as utils from "./utils.js";
 
 export const tableHandTemplate = utils.getElementAndAssert("table-hand-template");
@@ -96,7 +97,36 @@ export function updateHands(game) {
 function updateHand(seat, hand) {
     let index = 0;
     for (let card of hand.cards) {
+        let [rank, suit] = cardRankAndSuit(card);
         setCard(seat, index, rank, suit);
         index += 1;
     }
+}
+
+function cardRankAndSuit(card) {
+    let [faceValue, suit] = bridge.cardValueAndSuit(card);
+
+    let rank = faceValue.toString();
+    if (faceValue == 11) {
+        rank = "J";
+    } else if (faceValue == 12) {
+        rank = "Q";
+    } else if (faceValue == 13) {
+        rank = "K";
+    } else if (faceValue == 14) {
+        rank = "A";
+    }
+
+    let realSuit = null;
+    if (suit == "Clubs") {
+        realSuit = clubs;
+    } else if (suit == "Diamonds") {
+        realSuit = diamonds;
+    } else if (suit == "Hearts") {
+        realSuit = hearts;
+    } else if (suit == "Spades") {
+        realSuit = spades;
+    }
+
+    return [rank, realSuit];
 }
