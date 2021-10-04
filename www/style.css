@@ -4,6 +4,10 @@
     outline: 0;
 }
 
+.cards {
+    gap: 0;
+}
+
 body {
     outline: 1px solid gray;
 }

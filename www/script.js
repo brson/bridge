@@ -16,9 +16,7 @@ function initializeTable() {
 
     for (let seat of seats) {
         let newHand = dom.tableHandTemplate.content.cloneNode(true);
-        console.log(newHand);
         let cardsRow = newHand.querySelector(".cards");
-        console.log(cardsRow);
         for (let card = 0; card < 13; card++) {
             let newCard = dom.tableCardTemplate.content.cloneNode(true);
             cardsRow.appendChild(newCard);
