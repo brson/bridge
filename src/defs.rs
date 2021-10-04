@@ -230,7 +230,7 @@ impl Card {
         self.0 % 13 + 2
     }
 
-    pub fn suite(&self) -> Suit {
+    pub fn suit(&self) -> Suit {
         if (0..=12).contains(&self.0) {
             Suit::Clubs
         } else if (13..=25).contains(&self.0) {
@@ -247,7 +247,7 @@ impl Card {
 
 impl Hand {
     pub fn count_suit(&self, suit: Suit) -> u8 {
-        self.cards.iter().filter(|c| c.suite() == suit)
+        self.cards.iter().filter(|c| c.suit() == suit)
             .count()
             .try_into().expect("u8")
     }
