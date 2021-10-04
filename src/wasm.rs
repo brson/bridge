@@ -1,35 +1,47 @@
-use log::info;
-use wasm_bindgen::prelude::*;
 use serde::{Serialize, Deserialize};
 use serde_json;
 
-#[wasm_bindgen]
-pub fn init() {
-    console_error_panic_hook::set_once();
-    console_log::init_with_level(log::Level::Debug);
+mod exports {
+    use wasm_bindgen::prelude::*;
+    use super::{api, serialize};
 
-    info!("bridge wasm initialized");
-}
+    pub type Json = String;
 
-#[derive(Serialize, Deserialize)]
-pub struct Game {
-    name: String,
-}
+    #[wasm_bindgen]
+    pub fn init() {
+        api::init()
+    }
 
-pub type Json = String;
-
-#[wasm_bindgen]
-pub fn new_game() -> Json {
-    serialize(new_game_())
-}
-
-fn new_game_() -> Game {
-    Game {
-        name: "hi".to_string()
+    #[wasm_bindgen]
+    pub fn new_game() -> Json {
+        serialize(api::new_game())
     }
 }
 
-fn serialize<T>(value: T) -> Json
+mod api {
+    use log::info;
+    use serde::{Serialize, Deserialize};
+
+    #[derive(Serialize, Deserialize)]
+    pub struct Game {
+        name: String,
+    }
+
+    pub fn init() {
+        console_error_panic_hook::set_once();
+        console_log::init_with_level(log::Level::Debug);
+
+        info!("bridge wasm initialized");
+    }
+
+    pub fn new_game() -> Game {
+        Game {
+            name: "hi".to_string()
+        }
+    }
+}
+
+fn serialize<T>(value: T) -> String
 where T: Serialize
 {
     serde_json::to_string(&value).expect("json")
