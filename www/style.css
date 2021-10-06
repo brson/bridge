@@ -133,8 +133,7 @@ input[type = "radio"] ~ span {
     
 }
 
-h1
-{
+h1 {
     text-align: center;
 }
 
