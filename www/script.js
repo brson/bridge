@@ -2,19 +2,17 @@ import * as utils from "./utils.js";
 import * as dom from "./dom.js";
 import * as bridge from "./bridge.js";
 
-async function main() {
-    initializeTable();
+let game = null;
 
-    let game = bridge.newGame();
+function main() {
+    initializeTable();
+    initializeEventHandlers();
+
+    game = bridge.newGame();
 
     dom.updateHands(game);
 
     updateInfoBar(game);
-}
-
-function updateInfoBar(game) {
-    let nextPlayer = bridge.nextPlayer(game);
-    dom.infoNextPlayerSpan.innerText = nextPlayer;
 }
 
 function initializeTable() {
@@ -36,4 +34,13 @@ function initializeTable() {
     }
 }
 
-await main();
+function initializeEventHandlers() {
+    
+}
+
+function updateInfoBar(game) {
+    let nextPlayer = bridge.nextPlayer(game);
+    dom.infoNextPlayerSpan.innerText = nextPlayer;
+}
+
+main();
