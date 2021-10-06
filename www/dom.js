@@ -86,6 +86,10 @@ export function setCard(seat, index, rank, suit) {
     suitElt.classList.add(`suit-${suit}`);
 }
 
+export function getAllCardButtons() {
+    return document.querySelectorAll("#table .card");
+}
+
 export function updateHands(game) {
     let deck = game.auction.deck;
     updateHand(north, deck.north);

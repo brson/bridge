@@ -35,7 +35,11 @@ function initializeTable() {
 }
 
 function initializeEventHandlers() {
-    
+    for (let button of dom.getAllCardButtons()) {
+        button.addEventListener("click", () => {
+            console.log("click");
+        });
+    }
 }
 
 function updateInfoBar(game) {
