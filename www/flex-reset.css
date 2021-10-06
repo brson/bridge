@@ -27,7 +27,7 @@
     appearance: none; /* remove input element styling */
 }
 
-:root {
+html {
     box-sizing: border-box;
     box-shadow: 0 0 0 black;
     outline: 0 solid black;
