@@ -91,6 +91,10 @@ h1
     width: max-content;
 }
 
+label.radio {
+    cursor: pointer;
+}
+
 input[type="radio"]:checked {
     background-color: lightgray;
 }
