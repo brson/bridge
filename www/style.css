@@ -1,3 +1,8 @@
+* {
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
 :root {
     --bg-color: hsla(45, 100%, 80%, 1);
     --hand-bg-color: hsla(75, 100%, 90%, 1);
@@ -44,9 +49,24 @@ html * {
     gap: 0.5rem;
 }
 
+#table-north,
+#table-east,
+#table-west,
+#table-south,
+#auction-call-panel,
+#auction-call-buttons,
+#infobar
+{
+    box-shadow: 0.5em 0.5em 0.5rem hsla(45, 100%, 0%, 0.3),
+                0.5em -0.5em 0.5rem hsla(45, 100%, 0%, 0.1),
+                -0.5em 0.5em 0.5rem hsla(45, 100%, 0%, 0.1),
+                inset 0 0 1rem hsla(45, 75%, 50%, 0.3);
+}
+
 body * {
     outline: 1px solid lightgray;
-    /*box-shadow: 0 0 0.5rem pink;*/
+    box-shadow: 0 0 0.5rem hsla(45, 75%, 50%, 0.3),
+                inset 0 0 1rem hsla(45, 75%, 50%, 0.3);
 }
 
 input[type = "radio"]:not(:checked),

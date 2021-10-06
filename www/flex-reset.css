@@ -9,9 +9,10 @@
     box-sizing: inherit;
     font-family: inherit;
     color: inherit;
-    background-color: inherit;
     overflow-wrap: inherit;
     cursor: inherit;
+
+    background-color: transparent;
 
     /* these are questionable */
     flex-wrap: inherit;
