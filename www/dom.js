@@ -7,7 +7,7 @@ export const tableNorth = utils.getElementAndAssert("table-north");
 export const tableEast = utils.getElementAndAssert("table-east");
 export const tableSouth = utils.getElementAndAssert("table-south");
 export const tableWest = utils.getElementAndAssert("table-west");
-
+export const infoNextPlayerSpan = utils.getElementAndAssert("info-next-player");
 
 
 export const north = "north";
