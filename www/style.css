@@ -5,16 +5,19 @@ html * {
 
 body * {
     outline: 1px solid lightgray;
+    box-shadow: 0 0 0.5rem pink;
 }
 
-input[type = "radio"],
+input[type = "radio"]:not(:checked),
 input[type = "radio"] ~ span {
     outline: 0;
+    box-shadow: 0 0;
 }
 
 .quiet {
     padding: 0;
     outline: 0;
+    box-shadow: 0 0;
 }
 
 .cards {
@@ -98,5 +101,4 @@ label.radio {
 
 input[type="radio"]:checked {
     background-color: white;
-    outline: 1px solid lightgray;
 }
