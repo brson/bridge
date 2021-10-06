@@ -81,3 +81,12 @@ h1
 #infobar {
     flex-grow: 1;
 }
+
+#table-center {
+    justify-content: center;
+    align-content: center;
+}
+
+#auction-call-panel {
+    width: max-content;
+}
