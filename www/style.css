@@ -8,7 +8,7 @@ body * {
 }
 
 input[type = "radio"],
-input[type = "radio"] ~ label {
+input[type = "radio"] ~ span {
     outline: 0;
 }
 
