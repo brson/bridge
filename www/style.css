@@ -65,10 +65,7 @@ body * {
     
 }
 
-#table-north > span,
-#table-east > span,
-#table-west > span,
-#table-south > span
+h1
 {
     text-align: center;
 }
