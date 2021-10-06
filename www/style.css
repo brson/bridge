@@ -129,8 +129,8 @@ input[type = "radio"] ~ span {
     min-width: 6em;
 }
 
-#table-east .hard {
-    
+#table-east .card {
+    justify-content: flex-end;
 }
 
 h1 {
