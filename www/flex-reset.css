@@ -28,7 +28,7 @@
 
 :root {
     box-sizing: border-box;
-    box-shadow: inset 0 0 0 black;
+    box-shadow: 0 0 0 black;
     outline: 0 solid black;
     flex-wrap: wrap;
     max-width: 100%;
@@ -38,6 +38,10 @@
 }
 
 head,
-template {
+meta,
+link,
+script,
+template
+{
     display: none;
 }
