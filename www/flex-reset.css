@@ -24,6 +24,7 @@
     border: 0 solid black;
     padding: 0;
     gap: 0;
+    appearance: none; /* remove input element styling */
 }
 
 :root {

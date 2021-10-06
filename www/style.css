@@ -4,7 +4,7 @@
 }
 
 body * {
-    outline: 1px solid gray;
+    outline: 1px solid lightgray;
 }
 
 input[type = "radio"],
@@ -89,4 +89,8 @@ h1
 
 #auction-call-panel {
     width: max-content;
+}
+
+input[type="radio"]:checked {
+    background-color: lightgray;
 }
