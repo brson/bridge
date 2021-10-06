@@ -1,9 +1,10 @@
 :root {
-    --bg-color: hsla(0, 0%, 99%, 1);
-    --hand-bg-color: hsla(120, 100%, 95%, 1);
-    --button-color: hsla(0, 100%, 95%, 1);
-    --header-color: hsla(240, 100%, 95%, 1);
-    --card-color: hsla(0, 100%, 100%, 1);
+    --bg-color: hsla(45, 100%, 80%, 1);
+    --hand-bg-color: hsla(75, 100%, 90%, 1);
+    --panel-bg-color: hsla(45, 100%, 90%, 1);
+    --button-color: hsla(210, 100%, 95%, 1);
+    --header-color: hsla(240, 100%, 98%, 1);
+    --card-color: hsla(60, 100%, 95%, 1);
 }
 
 html {
@@ -16,6 +17,17 @@ html {
 #table-south
 {
     background-color: var(--hand-bg-color);
+}
+
+#auction-call-panel,
+#auction-call-buttons,
+#infobar
+{
+    background-color: var(--panel-bg-color);
+}
+
+#infobar > div {
+    background-color: var(--card-color);
 }
 
 h1 {
