@@ -14,18 +14,36 @@
 <script src="../dist/webpack-bundle.js" defer></script>
 <script src="script.js" type="module"></script>
 
-<div id="table-and-info" class="row noborder">
-  <div id="table" class="row-container noborder">
+<div id="table-and-info" class="row quiet">
+  <div id="table" class="row-container quiet">
     <div class="quiet">
       <section id="table-north">
         <h1>north</h1>
       </section>
     </div>
-    <div class="noborder">
+    <div class="quiet">
       <section id="table-west">
         <h1>west</h1>
       </section>
-      <section id="table-center" class="noborder">
+      <section id="table-center" class="quiet">
+        <div id="auction-call-panel" class="row">
+          <div class="row-container quiet">
+            <span><input type="radio" name="call-level" id="call-level-1"><label for="call-level-1">1</label></span>
+            <span><input type="radio" name="call-level" id="call-level-2"><label for="call-level-2">2</label></span>
+            <span><input type="radio" name="call-level" id="call-level-3"><label for="call-level-3">3</label></span>
+            <span><input type="radio" name="call-level" id="call-level-4"><label for="call-level-4">4</label></span>
+            <span><input type="radio" name="call-level" id="call-level-5"><label for="call-level-5">5</label></span>
+            <span><input type="radio" name="call-level" id="call-level-6"><label for="call-level-6">6</label></span>
+            <span><input type="radio" name="call-level" id="call-level-7"><label for="call-level-7">7</label></span>
+          </div>
+          <div class="row-container quiet">
+            <span><input type="radio" name="call-suit" id="call-suit-nt"><label for="call-suit-nt">NT</label></span>
+            <span><input type="radio" name="call-suit" id="call-suit-spades"><label for="call-suit-spades">spades</label></span>
+            <span><input type="radio" name="call-suit" id="call-suit-hearts"><label for="call-suit-hearts">hearts</label></span>
+            <span><input type="radio" name="call-suit" id="call-suit-diamonds"><label for="call-suit-diamonds">diamonds</label></span>
+            <span><input type="radio" name="call-suit" id="call-suit-clubs"><label for="call-suit-clibs">clubs</label></span>
+          </div>
+        </div>
       </section>
       <section id="table-east">
         <h1>east</h1>

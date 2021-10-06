@@ -3,17 +3,16 @@
     gap: 0.5rem;
 }
 
-html * {
+body * {
     outline: 1px solid gray;
 }
 
-.quiet {
-    padding: 0;
-    gap: 0;
+input[type = "radio"],
+input[type = "radio"] ~ label {
     outline: 0;
 }
 
-.noborder {
+.quiet {
     padding: 0;
     outline: 0;
 }
@@ -23,7 +22,7 @@ body {
 }
 
 .cards {
-    gap: 0;
+/*    gap: 4px;*/
 }
 
 #table-and-info {
