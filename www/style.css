@@ -143,3 +143,25 @@ label.radio {
 input[type="radio"]:checked {
     background-color: var(--bg-color);
 }
+
+/* https://cssgradient.io/blog/gradient-patterns/ */
+/* checkerboard */
+html {
+    --c1: #55b;
+    --c2: #b99;
+    --sz: 4px;
+    --hsz: calc(var(--sz) / 2);
+    --nhsz: calc(0px - var(--hsz));
+    background-color: var(--c1);
+    background-image:
+        linear-gradient(45deg, var(--c2) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--c2) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--c2) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--c2) 75%);
+    background-size: var(--sz) var(--sz);
+    background-position: 0 0, 0 var(--hsz), var(--hsz) var(--nhsz), var(--nhsz) 0px;
+}
+
+body {
+    background-color: transparent;
+}
