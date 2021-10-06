@@ -4,16 +4,11 @@
 }
 
 :root {
-    --bg-color: hsla(45, 100%, 80%, 1);
     --hand-bg-color: hsla(75, 100%, 90%, 1);
     --panel-bg-color: hsla(45, 100%, 90%, 1);
     --button-color: hsla(210, 100%, 95%, 1);
     --header-color: hsla(240, 100%, 98%, 1);
     --card-color: hsla(60, 100%, 95%, 1);
-}
-
-html {
-    background-color: var(--bg-color);
 }
 
 #table-north,
@@ -60,12 +55,14 @@ html * {
     box-shadow: 0.5em 0.5em 0.5rem hsla(45, 100%, 0%, 0.3),
                 0.5em -0.5em 0.5rem hsla(45, 100%, 0%, 0.1),
                 -0.5em 0.5em 0.5rem hsla(45, 100%, 0%, 0.1),
+                inset 0 0 2px hsla(45, 75%, 50%, 0.7);
                 inset 0 0 1rem hsla(45, 75%, 50%, 0.3);
 }
 
 body * {
     outline: 1px solid lightgray;
     box-shadow: 0 0 0.5rem hsla(45, 75%, 50%, 0.3),
+                inset 0 0 2px hsla(45, 75%, 50%, 0.7);
                 inset 0 0 1rem hsla(45, 75%, 50%, 0.3);
 }
 
@@ -160,7 +157,7 @@ label.radio {
 }
 
 input[type="radio"]:checked {
-    background-color: var(--bg-color);
+    background-color: var(--card-color);
 }
 
 /* https://cssgradient.io/blog/gradient-patterns/ */
