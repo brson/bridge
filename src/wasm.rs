@@ -21,6 +21,11 @@ mod exports {
     pub fn card_value_and_suit(card: u8) -> Json {
         serialize(api::card_value_and_suit(card))
     }
+
+    #[wasm_bindgen]
+    pub fn next_player(auction_state: Json) -> Json {
+        serialize(api::next_player(deserialize(auction_state)))
+    }
 }
 
 mod api {
@@ -55,6 +60,10 @@ mod api {
     pub fn card_value_and_suit(card: u8) -> (u8, Suit) {
         let card = Card::from(card);
         (card.face_value(), card.suit())
+    }
+
+    pub fn next_player(game: Game) -> Seat {
+        game.auction.next_player()
     }
 }
 

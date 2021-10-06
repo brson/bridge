@@ -12,3 +12,7 @@ export function newGame() {
 export function cardValueAndSuit(card) {
     return JSON.parse(bridgeWasm.card_value_and_suit(card));
 }
+
+export function nextPlayer(game) {
+    return JSON.parse(bridgeWasm.next_player(JSON.stringify(game)));
+}

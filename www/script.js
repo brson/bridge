@@ -8,6 +8,13 @@ async function main() {
     let game = bridge.newGame();
 
     dom.updateHands(game);
+
+    updateInfoBar(game);
+}
+
+function updateInfoBar(game) {
+    let nextPlayer = bridge.nextPlayer(game);
+    dom.infoNextPlayerSpan.innerText = nextPlayer;
 }
 
 function initializeTable() {
