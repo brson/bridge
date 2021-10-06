@@ -10,6 +10,12 @@
     --button-color: hsla(210, 100%, 95%, 1);
     --header-color: hsla(240, 100%, 98%, 1);
     --card-color: hsla(60, 100%, 95%, 1);
+    --font-color: hsla(0, 0%, 0%, 0.7);
+    --outline-color: hsla(45, 100%, 25%, 0.5);
+}
+
+* {
+    color: var(--font-color);
 }
 
 #table-north,
@@ -61,7 +67,7 @@ html * {
 }
 
 body * {
-    outline: 1px solid lightgray;
+    outline: 1px solid var(--outline-color);
     box-shadow: 0 0 0.5rem hsla(45, 75%, 50%, 0.3),
                 inset 0 0 2px hsla(45, 75%, 50%, 0.7);
                 inset 0 0 1rem hsla(45, 75%, 50%, 0.3);
@@ -103,6 +109,12 @@ input[type = "radio"] ~ span {
 .suit-♥
 {
     color: red;
+}
+
+.suit-♣,
+.suit-♠
+{
+    color: black;
 }
 
 .card {
