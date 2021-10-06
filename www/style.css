@@ -9,7 +9,7 @@
     --panel-bg-color: hsla(45, 100%, 90%, 1);
     --button-color: hsla(180, 100%, 95%, 1);
     --header-color: hsla(270, 100%, 95%, 1);
-    --card-color: hsla(60, 100%, 95%, 1);
+    --card-color: hsla(60, 100%, 100%, 1);
     --font-color: hsla(0, 0%, 0%, 0.7);
     --outline-color: hsla(45, 100%, 25%, 0.5);
 }
@@ -62,17 +62,19 @@ html * {
     box-shadow: 0.5em 0.5em 0.5rem hsla(45, 100%, 0%, 0.3),
                 0.5em -0.5em 0.5rem hsla(45, 100%, 0%, 0.1),
                 -0.5em 0.5em 0.5rem hsla(45, 100%, 0%, 0.1),
-                inset 0 0 2px hsla(45, 75%, 50%, 0.7),
-                inset 0 0 0.5rem hsla(45, 75%, 50%, 0.7),
-                inset 0 0 1rem hsla(45, 75%, 50%, 0.7);
+                inset 0 0 1px hsla(45, 75%, 50%, 1),
+                inset 0 0 2px hsla(45, 75%, 50%, 1),
+                inset 0 0 4px hsla(45, 75%, 50%, 1),
+                inset 0 0 1rem hsla(45, 75%, 50%, 0.1);
 }
 
 body * {
     outline: 1px solid var(--outline-color);
     box-shadow: 0 0 0.5rem hsla(45, 100%, 50%, 0.5),
-                inset 0 0 2px hsla(45, 75%, 50%, 0.7),
-                inset 0 0 0.5rem hsla(45, 75%, 50%, 0.7),
-                inset 0 0 1rem hsla(45, 75%, 50%, 0.7);
+                inset 0 0 1px hsla(45, 75%, 50%, 1),
+                inset 0 0 2px hsla(45, 75%, 50%, 1),
+                inset 0 0 4px hsla(45, 75%, 50%, 1),
+                inset 0 0 1rem hsla(45, 75%, 50%, 0.1);
 }
 
 input[type = "radio"]:not(:checked),
