@@ -1,3 +1,32 @@
+:root {
+    --bg-color: hsla(0, 0%, 99%, 1);
+    --hand-bg-color: hsla(120, 100%, 95%, 1);
+    --button-color: hsla(0, 100%, 95%, 1);
+    --header-color: hsla(240, 100%, 95%, 1);
+    --card-color: hsla(0, 100%, 100%, 1);
+}
+
+html {
+    background-color: var(--bg-color);
+}
+
+#table-north,
+#table-east,
+#table-west,
+#table-south
+{
+    background-color: var(--hand-bg-color);
+}
+
+h1 {
+    background-color: var(--header-color);
+}
+
+#table .card {
+    background-color: var(--card-color);
+}
+
+
 html * {
     padding: 0.5rem;
     gap: 0.5rem;
@@ -5,7 +34,7 @@ html * {
 
 body * {
     outline: 1px solid lightgray;
-    box-shadow: 0 0 0.5rem pink;
+    /*box-shadow: 0 0 0.5rem pink;*/
 }
 
 input[type = "radio"]:not(:checked),
@@ -91,14 +120,14 @@ h1
 }
 
 button {
-    background-color: bisque;
+    background-color: var(--button-color);
 }
 
 label.radio {
     cursor: pointer;
-    background-color: bisque;
+    background-color: var(--button-color);
 }
 
 input[type="radio"]:checked {
-    background-color: white;
+    background-color: var(--bg-color);
 }
