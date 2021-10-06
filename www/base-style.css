@@ -3,6 +3,21 @@
     gap: 0.5rem;
 }
 
+html * {
+    outline: 1px solid gray;
+}
+
+.quiet {
+    padding: 0;
+    gap: 0;
+    outline: 0;
+}
+
+.noborder {
+    padding: 0;
+    outline: 0;
+}
+
 button {
     cursor: pointer;
 }
