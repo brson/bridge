@@ -15,16 +15,18 @@
     background-color: transparent;
 
     /* these are questionable */
-    flex-wrap: inherit;
     max-width: inherit;
     max-height: inherit;
     box-shadow: inherit;
+
+    flex-wrap: wrap;
 
     outline: 0;
     margin: 0;
     border: 0 solid black;
     padding: 0;
     gap: 0;
+
     appearance: none; /* remove input element styling */
 }
 
@@ -32,7 +34,6 @@ html {
     box-sizing: border-box;
     box-shadow: 0 0 0 black;
     outline: 0 solid black;
-    flex-wrap: wrap;
     max-width: 100%;
     max-height: 100%;
     overflow-wrap: anywhere;
