@@ -91,10 +91,16 @@ h1
     width: max-content;
 }
 
+button {
+    background-color: bisque;
+}
+
 label.radio {
     cursor: pointer;
+    background-color: bisque;
 }
 
 input[type="radio"]:checked {
-    background-color: lightgray;
+    background-color: white;
+    outline: 1px solid lightgray;
 }
