@@ -62,15 +62,15 @@ html * {
     box-shadow: 0.5em 0.5em 0.5rem hsla(45, 100%, 0%, 0.3),
                 0.5em -0.5em 0.5rem hsla(45, 100%, 0%, 0.1),
                 -0.5em 0.5em 0.5rem hsla(45, 100%, 0%, 0.1),
-                inset 0 0 2px hsla(45, 75%, 50%, 0.7);
-                inset 0 0 1rem hsla(45, 75%, 50%, 0.3);
+                inset 0 0 2px hsla(45, 75%, 50%, 0.7),
+                inset 0 0 1rem hsla(45, 75%, 50%, 0.7);
 }
 
 body * {
     outline: 1px solid var(--outline-color);
     box-shadow: 0 0 0.5rem hsla(45, 75%, 50%, 0.3),
-                inset 0 0 2px hsla(45, 75%, 50%, 0.7);
-                inset 0 0 1rem hsla(45, 75%, 50%, 0.3);
+                inset 0 0 2px hsla(45, 75%, 50%, 0.7),
+                inset 0 0 1rem hsla(45, 75%, 50%, 0.7);
 }
 
 input[type = "radio"]:not(:checked),
