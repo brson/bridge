@@ -33,10 +33,10 @@ const QUEEN = "Q";
 const KING = "K";
 const ACE = "A";
 
-export const clubs = "♣";
-export const diamonds = "♦";
-export const hearts = "♥";
-export const spades = "♠";
+export const CLUBS = "♣";
+export const DIAMONDS = "♦";
+export const HEARTS = "♥";
+export const SPADES = "♠";
 
 const SEATS = [
     NORTH, EAST, SOUTH, WEST
@@ -49,15 +49,15 @@ const RANKS = [
     JACK, QUEEN, KING, ACE
 ];
 
-export const suits = [
-    clubs, diamonds, hearts, spades
+export const SUITS = [
+    CLUBS, DIAMONDS, HEARTS, SPADES
 ];
 
 export function setCard(seat, index, rank, suit) {
     console.assert(-1 != SEATS.indexOf(seat));
     console.assert(0 <= index && index <= 12);
     console.assert(-1 != RANKS.indexOf(rank));
-    console.assert(-1 != suits.indexOf(suit));
+    console.assert(-1 != SUITS.indexOf(suit));
 
     let seatElt = null;
 
@@ -127,13 +127,13 @@ function cardRankAndSuit(card) {
 
     let realSuit = null;
     if (suit == "Clubs") {
-        realSuit = clubs;
+        realSuit = CLUBS;
     } else if (suit == "Diamonds") {
-        realSuit = diamonds;
+        realSuit = DIAMONDS;
     } else if (suit == "Hearts") {
-        realSuit = hearts;
+        realSuit = HEARTS;
     } else if (suit == "Spades") {
-        realSuit = spades;
+        realSuit = SPADES;
     }
 
     return [rank, realSuit];
@@ -153,6 +153,6 @@ export function getBidSuit() {
     if (elt != null) {
         return elt.value;
     } else {
-        return clubs;
+        return CLUBS;
     }
 }
