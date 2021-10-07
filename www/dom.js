@@ -38,7 +38,7 @@ export const diamonds = "♦";
 export const hearts = "♥";
 export const spades = "♠";
 
-export const seats = [
+const SEATS = [
     NORTH, EAST, SOUTH, WEST
 ];
 
@@ -54,7 +54,7 @@ export const suits = [
 ];
 
 export function setCard(seat, index, rank, suit) {
-    console.assert(-1 != seats.indexOf(seat));
+    console.assert(-1 != SEATS.indexOf(seat));
     console.assert(0 <= index && index <= 12);
     console.assert(-1 != RANKS.indexOf(rank));
     console.assert(-1 != suits.indexOf(suit));
