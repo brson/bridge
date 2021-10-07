@@ -76,6 +76,7 @@ mod api {
     }
 
     pub fn play_auction_call(game: Game, call: PlayerCall) -> CallEvaluationResult {
+        log::info!("playing {:?}", call);
         eval::check_call(game.auction, call)
     }
 }

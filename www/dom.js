@@ -142,7 +142,7 @@ function cardRankAndSuit(card) {
 export function getBidLevel() {
     let elt = document.querySelector('input[name="call-level"]:checked');
     if (elt != null) {
-        parseInt(elt.value);
+        return parseInt(elt.value);
     } else {
         return 1;
     }
@@ -151,8 +151,25 @@ export function getBidLevel() {
 export function getBidSuit() {
     let elt = document.querySelector('input[name="call-suit"]:checked');
     if (elt != null) {
-        return elt.value;
+        return domSuitToWasmSuit(elt.value);
     } else {
-        return CLUBS;
+        return bridge.CLUBS;
     }
 }
+
+export function domSuitToWasmSuit(suit) {
+    if (suit == "clubs") {
+        return bridge.CLUBS;
+    } else if (suit == "diamonds") {
+        return bridge.DIAMONDS;
+    } else if (seat == "hearts") {
+        return bridge.HEARTS;
+    } else if (suit == "spades") {
+        return bridge.SPADES;
+    } else if (suit == "nt") {
+        return bridge.NOTRUMP;
+    } else {
+        throw "bad suit name";
+    }
+}
+
