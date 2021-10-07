@@ -14,10 +14,10 @@ export const auctionCallRedoubleButton = utils.getElementAndAssert("call-redoubl
 export const infoNextPlayerSpan = utils.getElementAndAssert("info-next-player");
 
 
-export const NORTH = "north";
-export const EAST = "east";
-export const SOUTH = "south";
-export const WEST = "west";
+const NORTH = "north";
+const EAST = "east";
+const SOUTH = "south";
+const WEST = "west";
 
 const TWO = "2";
 const THREE = "3";
@@ -33,10 +33,10 @@ const QUEEN = "Q";
 const KING = "K";
 const ACE = "A";
 
-export const CLUBS = "♣";
-export const DIAMONDS = "♦";
-export const HEARTS = "♥";
-export const SPADES = "♠";
+const CLUBS = "♣";
+const DIAMONDS = "♦";
+const HEARTS = "♥";
+const SPADES = "♠";
 
 const SEATS = [
     NORTH, EAST, SOUTH, WEST
@@ -49,7 +49,7 @@ const RANKS = [
     JACK, QUEEN, KING, ACE
 ];
 
-export const SUITS = [
+const SUITS = [
     CLUBS, DIAMONDS, HEARTS, SPADES
 ];
 
