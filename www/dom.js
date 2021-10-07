@@ -97,9 +97,9 @@ export function getAllCardButtons() {
 export function updateHands(game) {
     let deck = game.auction.deck;
     updateHand(NORTH, deck.north);
-    updateHand(NORTH, deck.east);
-    updateHand(NORTH, deck.south);
-    updateHand(NORTH, deck.west);
+    updateHand(EAST, deck.east);
+    updateHand(SOUTH, deck.south);
+    updateHand(WEST, deck.west);
 }
 
 function updateHand(seat, hand) {
