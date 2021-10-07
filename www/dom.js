@@ -14,10 +14,10 @@ export const auctionCallRedoubleButton = utils.getElementAndAssert("call-redoubl
 export const infoNextPlayerSpan = utils.getElementAndAssert("info-next-player");
 
 
-export const north = "north";
-export const east = "east";
-export const south = "south";
-export const west = "west";
+export const NORTH = "north";
+export const EAST = "east";
+export const SOUTH = "south";
+export const WEST = "west";
 
 export const two = "2";
 export const three = "3";
@@ -39,7 +39,7 @@ export const hearts = "♥";
 export const spades = "♠";
 
 export const seats = [
-    north, east, south, west
+    NORTH, EAST, SOUTH, WEST
 ];
 
 export const ranks = [
@@ -61,13 +61,13 @@ export function setCard(seat, index, rank, suit) {
 
     let seatElt = null;
 
-    if (seat == north) {
+    if (seat == NORTH) {
         seatElt = tableNorth;
-    } else if (seat == east) {
+    } else if (seat == EAST) {
         seatElt = tableEast;
-    } else if (seat == south) {
+    } else if (seat == SOUTH) {
         seatElt = tableSouth;
-    } else if (seat == west) {
+    } else if (seat == WEST) {
         seatElt = tableWest;
     }
 
@@ -96,10 +96,10 @@ export function getAllCardButtons() {
 
 export function updateHands(game) {
     let deck = game.auction.deck;
-    updateHand(north, deck.north);
-    updateHand(east, deck.east);
-    updateHand(south, deck.south);
-    updateHand(west, deck.west);
+    updateHand(NORTH, deck.north);
+    updateHand(NORTH, deck.east);
+    updateHand(NORTH, deck.south);
+    updateHand(NORTH, deck.west);
 }
 
 function updateHand(seat, hand) {
