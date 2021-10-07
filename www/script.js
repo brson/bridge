@@ -40,6 +40,12 @@ function initializeEventHandlers() {
             console.log("click");
         });
     }
+
+    dom.auctionCallBidButton.addEventListener("click", () => {
+        let level = dom.getBidLevel();
+        let suit = dom.getBidSuit();
+        game = bridge.playBid(game, level, suit);
+    });
 }
 
 function updateInfoBar(game) {

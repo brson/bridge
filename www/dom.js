@@ -7,6 +7,10 @@ export const tableNorth = utils.getElementAndAssert("table-north");
 export const tableEast = utils.getElementAndAssert("table-east");
 export const tableSouth = utils.getElementAndAssert("table-south");
 export const tableWest = utils.getElementAndAssert("table-west");
+export const auctionCallBidButton = utils.getElementAndAssert("call-bid");
+export const auctionCallPassButton = utils.getElementAndAssert("call-pass");
+export const auctionCallDoubleButton = utils.getElementAndAssert("call-double");
+export const auctionCallRedoubleButton = utils.getElementAndAssert("call-redouble");
 export const infoNextPlayerSpan = utils.getElementAndAssert("info-next-player");
 
 
@@ -133,4 +137,22 @@ function cardRankAndSuit(card) {
     }
 
     return [rank, realSuit];
+}
+
+export function getBidLevel() {
+    let elt = document.querySelector('input[name="call-level"]:checked');
+    if (elt != null) {
+        parseInt(elt.value);
+    } else {
+        return 1;
+    }
+}
+
+export function getBidSuit() {
+    let elt = document.querySelector('input[name="call-suit"]:checked');
+    if (elt != null) {
+        return elt.value;
+    } else {
+        return clubs;
+    }
 }

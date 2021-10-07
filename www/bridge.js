@@ -16,3 +16,8 @@ export function cardValueAndSuit(card) {
 export function nextPlayer(game) {
     return JSON.parse(bridgeWasm.next_player(JSON.stringify(game)));
 }
+
+export function playBid(game, level, suit) {
+    // todo
+    console.log("todo");
+}
