@@ -26,6 +26,14 @@ mod exports {
     pub fn next_player(auction_state: Json) -> Json {
         serialize(api::next_player(deserialize(auction_state)))
     }
+
+    #[wasm_bindgen]
+    pub fn play_auction_call(game: Json, call: Json) -> Json {
+        serialize(api::play_auction_call(
+            deserialize(game),
+            deserialize(call)
+        ))
+    }
 }
 
 mod api {
@@ -33,6 +41,7 @@ mod api {
     use serde::{Serialize, Deserialize};
     use crate::defs::*;
     use crate::gen;
+    use crate::eval::{self, CallEvaluationResult};
 
     #[derive(Serialize, Deserialize)]
     pub struct Game {
@@ -64,6 +73,10 @@ mod api {
 
     pub fn next_player(game: Game) -> Seat {
         game.auction.next_player()
+    }
+
+    pub fn play_auction_call(game: Game, call: PlayerCall) -> CallEvaluationResult {
+        eval::check_call(game.auction, call)
     }
 }
 

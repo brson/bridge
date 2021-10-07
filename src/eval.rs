@@ -1,11 +1,14 @@
+use serde::{Serialize, Deserialize};
 use crate::defs::*;
 use crate::sim;
 
+#[derive(Serialize, Deserialize)]
 pub enum CallError {
     BiddingClosed,
     IncorrectPlayer { expected: Seat, actual: Seat },
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct CallEvaluationResult {
     pub state: AuctionState,
     pub call: PlayerCall,
@@ -13,6 +16,7 @@ pub struct CallEvaluationResult {
     pub evaluation: Result<CallEvaluation, CallError>,
 }
 
+#[derive(Serialize, Deserialize)]
 pub enum CallEvaluation {
     Unknown
 }
