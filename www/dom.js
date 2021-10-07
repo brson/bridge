@@ -19,19 +19,19 @@ export const EAST = "east";
 export const SOUTH = "south";
 export const WEST = "west";
 
-export const two = "2";
-export const three = "3";
-export const four = "4";
-export const five = "5";
-export const six = "6";
-export const seven = "7";
-export const eight = "8";
-export const nine = "9";
-export const ten = "10";
-export const jack = "J";
-export const queen = "Q";
-export const king = "K";
-export const ace = "A";
+const TWO = "2";
+const THREE = "3";
+const FOUR = "4";
+const FIVE = "5";
+const SIX = "6";
+const SEVEN = "7";
+const EIGHT = "8";
+const NINE = "9";
+const TEN = "10";
+const JACK = "J";
+const QUEEN = "Q";
+const KING = "K";
+const ACE = "A";
 
 export const clubs = "♣";
 export const diamonds = "♦";
@@ -42,11 +42,11 @@ export const seats = [
     NORTH, EAST, SOUTH, WEST
 ];
 
-export const ranks = [
-    two,
-    three, four, five, six,
-    seven, eight, nine, ten,
-    jack, queen, king, ace
+const RANKS = [
+    TWO,
+    THREE, FOUR, FIVE, SIX,
+    SEVEN, EIGHT, NINE, TEN,
+    JACK, QUEEN, KING, ACE
 ];
 
 export const suits = [
@@ -56,7 +56,7 @@ export const suits = [
 export function setCard(seat, index, rank, suit) {
     console.assert(-1 != seats.indexOf(seat));
     console.assert(0 <= index && index <= 12);
-    console.assert(-1 != ranks.indexOf(rank));
+    console.assert(-1 != RANKS.indexOf(rank));
     console.assert(-1 != suits.indexOf(suit));
 
     let seatElt = null;
